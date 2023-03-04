@@ -3,11 +3,10 @@ export const getCollege = () => {
 		method: 'GET',
 		headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` },
 	}).then(async (res) => {
-		const result = await res.json
-		if (res.ok) {
-			console.log(result)
-			return result
+		const result = await res.json()
+		if (result.code !== 200 || result.body === null) {
+			return new Error(result.message)
 		}
-		return new Error(res as any)
+		return result.body
 	})
 }

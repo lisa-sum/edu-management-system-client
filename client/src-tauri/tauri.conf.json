@@ -1,6 +1,6 @@
 {
 	"build": {
-		"beforeDevCommand": "pnpm dev",
+		"beforeDevCommand": "pnpm dev:local",
 		"beforeBuildCommand": "pnpm build",
 		"devPath": "http://localhost:3000",
 		"distDir": "../dist"

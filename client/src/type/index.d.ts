@@ -78,7 +78,7 @@ type MessageBasic = {
 }
 
 // 学院列表
-type FilmOption = {
+type CollegeList = {
 	inputValue?: string
 	name: string
 	info: string
