@@ -30,7 +30,7 @@
 	"scripts": {
 		"dev:local": "vite --mode _local",
 		"dev:produ": "vite --mode release",
-		"build": "vite build",
+		"build": "vite build --mode release",
 		"preview": "vite preview",
 		"tauri": "tauri",
 		"eslint": "eslint src/**/**.ts src/**/**.tsx",

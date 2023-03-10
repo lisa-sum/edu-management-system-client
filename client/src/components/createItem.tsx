@@ -11,7 +11,7 @@ export default function CreateOptionDialog() {
 	const loading = open && options.length === 0
 
 	useEffect(() => {
-//		let active = true
+		//		let active = true
 		getCollege()
 			.then((res: CollegeList[]) => {
 				console.log(res)
@@ -24,10 +24,6 @@ export default function CreateOptionDialog() {
 		if (!loading) {
 			return undefined
 		}
-
-//		return () => {
-//			active = false
-//		}
 	}, [loading])
 
 	useEffect(() => {

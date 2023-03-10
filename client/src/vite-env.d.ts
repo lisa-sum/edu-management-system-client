@@ -8,4 +8,5 @@ type ImportMetaEnv = {
 	readonly VITE_APP_WS_Chat_HistoryMessage: string
 	readonly VITE_APP_WS_IM: string
 	readonly VITE_APP_COLLEGE_URL: string
+	readonly VITE_APP_SPECIALTY_LIST: string
 }

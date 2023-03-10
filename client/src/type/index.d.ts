@@ -83,3 +83,10 @@ type CollegeList = {
 	name: string
 	info: string
 }
+
+// 专业列表
+type Specialty = {
+	name: string
+	college: string
+	code: string
+}

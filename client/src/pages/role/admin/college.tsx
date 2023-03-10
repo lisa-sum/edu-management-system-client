@@ -1,5 +1,4 @@
 import { alpha, Box, FormControl, InputBase, InputLabel, styled } from '@mui/material'
-import Typography from '@mui/material/Typography'
 import Grid2 from '@mui/material/Unstable_Grid2'
 
 import CreateOptionDialog from '@/components/createItem'
@@ -61,7 +60,6 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
 export default function College() {
 	return (
 		<Box>
-			<Typography>Love</Typography>
 			<GridBox
 				container
 				spacing={3}
@@ -70,7 +68,7 @@ export default function College() {
 					lg={6}
 					md={12}
 				>
-					<CreateOptionDialog/>
+					<CreateOptionDialog />
 				</Grid2>
 				<Grid2
 					lg={6}
