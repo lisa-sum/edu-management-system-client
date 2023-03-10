@@ -26,32 +26,35 @@ import { useAppDispatch, useAppSelector } from '@/utils/hooks/index'
 
 // Teacher Router
 const teacherRoutes: RouteList[] = [
-	{ element: <Profile />, 'path': '/profile', 'label': '个人' },
-	{ element: <Schedule />, 'path': '/schedule', 'label': '课程表' },
-	{ element: <ApplyForClassRoom />, 'path': '/applyForClassRoom', 'label': '教室申请' },
-	{ element: <Mark />, 'path': '/mark', 'label': '开设课程' },
-	{ element: <Chat />, 'path': '/ws/chat', 'label': '即时聊天' },
+	{ element: <Profile />, path: '/profile', label: '个人' },
+	{ element: <Schedule />, path: '/schedule', label: '课程表' },
+	{ element: <ApplyForClassRoom />, path: '/applyForClassRoom', label: '教室申请' },
+	{ element: <Mark />, path: '/mark', label: '开设课程' },
+	{ element: <Chat />, path: '/ws/chat', label: '即时聊天' },
+	{ element: <Login />, path: '/login', label: '登录' },
 ]
 
 // Student Router
 const studentRoutes: RouteList[] = [
-	{ element: <Register />, 'path': '/register', 'label': '注册' },
-	{ element: <Profile />, 'path': '/profile', 'label': '个人' },
-	{ element: <Mark />, 'path': '/mark', 'label': '课程管理' },
-	{ element: <DropOut />, 'path': '/dropOut', 'label': '退课' },
-	{ element: <Schedule />, 'path': '/schedule', 'label': '课程表' },
-	{ element: <Inquiry />, 'path': '/inquiry', 'label': '成绩查询' },
-	{ element: <Chat />, 'path': '/ws/chat', 'label': '即时聊天' },
+	{ element: <Register />, path: '/register', label: '注册' },
+	{ element: <Profile />, path: '/profile', label: '个人' },
+	{ element: <Mark />, path: '/mark', label: '课程管理' },
+	{ element: <DropOut />, path: '/dropOut', label: '退课' },
+	{ element: <Schedule />, path: '/schedule', label: '课程表' },
+	{ element: <Inquiry />, path: '/inquiry', label: '成绩查询' },
+	{ element: <Chat />, path: '/ws/chat', label: '即时聊天' },
+	{ element: <Login />, path: '/login', label: '登录' },
 ]
 
 // Admin Router
 const adminRoutes: RouteList[] = [
-	{ element: <College />, 'path': '/college', 'label': '学院管理' },
-	{ element: <Specialty />, 'path': '/specialty', 'label': '专业管理' },
-	{ element: <Class />, 'path': '/class', 'label': '班级管理' },
-	{ element: <Mark />, 'path': '/mark', 'label': '课程管理' },
-	{ element: <Teacher />, 'path': '/registration', 'label': '教师管理' },
-	{ element: <Chat />, 'path': '/ws/chat', 'label': '即时聊天' },
+	{ element: <College />, path: '/college', label: '学院管理' },
+	{ element: <Specialty />, path: '/specialty', label: '专业管理' },
+	{ element: <Class />, path: '/class', label: '班级管理' },
+	{ element: <Mark />, path: '/mark', label: '课程管理' },
+	{ element: <Teacher />, path: '/registration', label: '教师管理' },
+	{ element: <Chat />, path: '/ws/chat', label: '即时聊天' },
+	{ element: <Login />, path: '/login', label: '登录' },
 ]
 
 const Role = ({
@@ -120,9 +123,9 @@ export default function Layout() {
 					username={username}
 				/>
 			)
-		// 未登录状态(访客)
 		case 'visitor':
 			return <Login />
+		// 未登录状态(访客)
 		default:
 			return (
 				<Alert severity="info">
@@ -130,8 +133,8 @@ export default function Layout() {
 					你还没有登录,请
 					<Button
 						onClick={() => {
-							navigate('/login')
 							dispatch(toggleRole('visitor'))
+							navigate('login')
 						}}
 					>
 						登录

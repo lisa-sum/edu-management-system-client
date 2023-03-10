@@ -7,8 +7,8 @@ const initialState: { value: Users } = {
 		account: '',
 		username: '',
 		avatar: '',
-		createdTime: 0,
-		updatedTime: 0,
+		createdTime: new Date().getTime(),
+		updatedTime: new Date().getTime(),
 	},
 }
 
