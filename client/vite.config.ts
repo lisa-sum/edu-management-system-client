@@ -24,7 +24,8 @@ export default defineConfig({
 		target: ['es2021', 'chrome100', 'safari13'], // Tauri supports es2021
 
 		// don't minify for debug builds
-		minify: !process.env.TAURI_DEBUG ? 'esbuild' : false,
+		//		minify: !process.env.TAURI_DEBUG ? 'esbuild' : false,
+		minify: process.env.VITE_NODE_ENV === 'production' ? 'esbuild' : false,
 
 		sourcemap: !!process.env.TAURI_DEBUG, // produce sourcemaps for debug builds
 	},
