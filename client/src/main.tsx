@@ -1,4 +1,4 @@
-import '@/assets/styles/global.css' // 全局样式
+import '@/styles/global.css' // 全局样式
 
 import React from 'react'
 import ReactDOM from 'react-dom/client'

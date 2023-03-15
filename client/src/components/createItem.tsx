@@ -1,18 +1,19 @@
 import Autocomplete from '@mui/material/Autocomplete'
 import CircularProgress from '@mui/material/CircularProgress'
 import TextField from '@mui/material/TextField'
-import { useEffect, useState } from 'react'
+import { Dispatch, SetStateAction, SyntheticEvent, useEffect, useState } from 'react'
 
-import { getCollege } from '@/api/getCollege'
+import { getCollegeList } from '@/api/getCollegeList'
+import { CollegeList } from '@/type'
 
-export default function CreateOptionDialog() {
+export default function CreateOptionDialog({ setCollegeType }: { setCollegeType: Dispatch<SetStateAction<string>> }) {
 	const [open, setOpen] = useState(false)
 	const [options, setOptions] = useState<readonly CollegeList[]>([])
 	const loading = open && options.length === 0
 
 	useEffect(() => {
 		//		let active = true
-		getCollege()
+		getCollegeList()
 			.then((res: CollegeList[]) => {
 				console.log(res)
 				setOptions([...res])
@@ -61,6 +62,9 @@ export default function CreateOptionDialog() {
 				/>
 			)}
 			sx={{ width: 300 }}
+			onChange={(_event: SyntheticEvent<Element, Event>, newValue: CollegeList | null) => {
+				setCollegeType(newValue?.name || '')
+			}}
 			onClose={() => {
 				setOpen(false)
 			}}

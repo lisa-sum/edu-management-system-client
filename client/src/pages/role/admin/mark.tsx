@@ -1,7 +1,3 @@
-export default function Mark () {
-	return (
-		<>
-			Mark
-		</>
-	)
+export default function Mark() {
+	return <>Mark</>
 }

@@ -1,6 +1,8 @@
-import { alpha, Box, FormControl, InputBase, InputLabel, styled } from '@mui/material'
+import { alpha, Box, Button, FormControl, InputBase, InputLabel, styled } from '@mui/material'
 import Grid2 from '@mui/material/Unstable_Grid2'
+import { ChangeEvent, useState } from 'react'
 
+import { updateSpecialty } from '@/api/updateSpecialty'
 import Grouped from '@/components/grouped'
 
 const GridBox = styled(Grid2)(({ theme }) => ({
@@ -58,6 +60,19 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
 }))
 
 export default function Specialty() {
+	const [oldName, setOldName] = useState<string>('')
+	const [name, setName] = useState<string>('')
+	const [info, setInfo] = useState<string>('')
+
+	const updateSpecialtyData = (oldName: string, name: string, info: string) => {
+		updateSpecialty(oldName, name, info)
+			.then((res) => {
+				console.log(res)
+			})
+			.catch((err) => {
+				console.error(err)
+			})
+	}
 	return (
 		<Box>
 			<GridBox
@@ -68,8 +83,9 @@ export default function Specialty() {
 					lg={6}
 					md={12}
 				>
-					<Grouped />
+					<Grouped setOldName={setOldName} />
 				</Grid2>
+
 				<Grid2
 					lg={6}
 					md={12}
@@ -79,11 +95,12 @@ export default function Specialty() {
 							shrink
 							htmlFor="input"
 						>
-							学院名称
+							修改专业名称
 						</InputLabel>
 						<BootstrapInput
 							id="input"
-							placeholder="学院"
+							placeholder="输入新的专业名称"
+							onChange={(event: ChangeEvent<HTMLInputElement>) => setName(event.target.value)}
 						/>
 					</FormControl>
 				</Grid2>
@@ -96,13 +113,30 @@ export default function Specialty() {
 							shrink
 							htmlFor="input"
 						>
-							学院名称
+							修改专业介绍
 						</InputLabel>
 						<BootstrapInput
 							id="input"
-							placeholder="学院"
+							placeholder="输入专业介绍"
+							onChange={(event: ChangeEvent<HTMLInputElement>) => setInfo(event.target.value)}
 						/>
 					</FormControl>
+				</Grid2>
+				<Grid2
+					lg={6}
+					md={12}
+				>
+					<Button
+						sx={{
+							width: '325px',
+							height: '46px',
+							fontSize: 18,
+						}}
+						variant="contained"
+						onClick={() => updateSpecialtyData(oldName, name, info)}
+					>
+						提交修改
+					</Button>
 				</Grid2>
 			</GridBox>
 		</Box>

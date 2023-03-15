@@ -1,4 +1,6 @@
 // 路由结构
+import { AlertColor } from '@mui/material'
+
 type RouteList = {
 	element: JSX.Element
 	path: string
@@ -89,4 +91,12 @@ type Specialty = {
 	name: string
 	college: string
 	code: string
+}
+
+// 标准返回状态
+type Status = {
+	code?: number
+	message: string
+	body?: any
+	state: AlertColor
 }

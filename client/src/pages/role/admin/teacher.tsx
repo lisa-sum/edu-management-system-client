@@ -1,7 +1,3 @@
-export default function Teacher () {
-	return (
-		<>
-			Teacher
-		</>
-	)
-};
+export default function Teacher() {
+	return <>Teacher</>
+}

@@ -1,17 +1,19 @@
-import TextField from '@mui/material/TextField'
 import Autocomplete from '@mui/material/Autocomplete'
-import { useEffect } from 'react'
-import { getSpecialtyList } from '@/api/getSpecialtyList'
-import { useAppDispatch } from '@/utils/hooks/index'
-import { updateSpecialty } from '@/features/user/specialty'
+import TextField from '@mui/material/TextField'
+import { Dispatch, SetStateAction, useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { RootState } from '@/store/index'
 
-export default function Grouped() {
+import { getSpecialtyList } from '@/api/getSpecialtyList'
+import { updateSpecialty } from '@/features/user/specialty'
+import { RootState } from '@/store/index'
+import { Specialty } from '@/type/index'
+import { useAppDispatch } from '@/utils/hooks/index'
+
+export default function Grouped({ setOldName }: { setOldName: Dispatch<SetStateAction<string>> }) {
 	const setSpecialtyList = useSelector((state: RootState) => state.specialty.value.specialtyList)
 	const dispatch = useAppDispatch()
 	useEffect(() => {
-		getSpecialtyList()
+		getSpecialtyList('all')
 			.then((res) => {
 				dispatch(updateSpecialty(res.body))
 			})
@@ -28,19 +30,20 @@ export default function Grouped() {
 
 	return (
 		<Autocomplete
+			getOptionLabel={(option) => option.name}
+			groupBy={(option) => option.college}
 			id="grouped-demo"
 			options={setSpecialtyList}
-			groupBy={(option) => option.college}
-			getOptionLabel={(option) => option.name}
-			sx={{
-				width: '400px',
-			}}
 			renderInput={(params) => (
 				<TextField
 					{...params}
 					label="选择一个专业"
 				/>
 			)}
+			sx={{
+				width: '400px',
+			}}
+			onChange={(_, value: Specialty | null) => setOldName(value?.name || '')}
 		/>
 	)
 }

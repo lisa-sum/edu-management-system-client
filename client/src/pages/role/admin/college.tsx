@@ -1,7 +1,12 @@
-import { alpha, Box, FormControl, InputBase, InputLabel, styled } from '@mui/material'
+import { Alert, alpha, Box, Button, FormControl, InputBase, InputLabel, styled, Typography } from '@mui/material'
 import Grid2 from '@mui/material/Unstable_Grid2'
+import { ChangeEvent, useState } from 'react'
 
+import { addCollege } from '@/api/addCollege'
+import { deleteCollege } from '@/api/deleteCollege'
+import { updateCollege } from '@/api/updateCollege'
 import CreateOptionDialog from '@/components/createItem'
+import { Status } from '@/type'
 
 const GridBox = styled(Grid2)(({ theme }) => ({
 	[theme.breakpoints.down('md')]: {
@@ -57,9 +62,90 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
 	},
 }))
 
+const updateCollegeData = (collegeType: string, collegeName: string, collegeInfo: string) => {
+	updateCollege(collegeType, collegeName, collegeInfo)
+		.then((res) => {
+			console.log(res)
+		})
+		.catch((err) => {
+			console.error(err)
+		})
+}
+
 export default function College() {
+	const [collegeType, setCollegeType] = useState<string>('')
+	const [collegeInfo, setCollegeInfo] = useState<string>('')
+	const [collegeName, setCollegeName] = useState<string>('')
+	const [show, setShow] = useState<boolean>(false)
+	const [status, setStatus] = useState<Status>({
+		code: 200,
+		message: '',
+		body: '',
+		state: 'success',
+	})
+	const addCollegeData = (collegeName: string, collegeInfo: string) => {
+		if (collegeName === '' || collegeInfo === '') {
+			setShow(true)
+			setStatus({
+				state: 'error',
+				message: '数据不能为空, 请输入数据!',
+			})
+			return
+		}
+		addCollege(collegeName, collegeInfo)
+			.then((res) => {
+				console.log(res)
+				setShow(true)
+				if (res.code === 409) {
+					setStatus({
+						state: 'info',
+						...res,
+					})
+				}
+				setStatus(res)
+			})
+			.catch((err) => {
+				setStatus({
+					state: 'error',
+					...err,
+				})
+				console.error(err)
+			})
+	}
+
+	const deleteCollegeData = (collegeType: string) => {
+		deleteCollege(collegeType)
+			.then((res) => {
+				console.log(res)
+				if (res.body.DeletedCount === 0) {
+					console.log(1)
+					setStatus({
+						message: '该数据已经删除, 请刷新页面',
+						state: 'info',
+					})
+					return
+				}
+				setShow(true)
+				setStatus(res)
+			})
+			.catch((err) => {
+				setStatus({
+					state: 'error',
+					...err,
+				})
+				console.error(err)
+			})
+	}
 	return (
 		<Box>
+			{show && (
+				<Alert
+					severity={status.state}
+					onClose={() => setShow(false)}
+				>
+					{status.message}
+				</Alert>
+			)}
 			<GridBox
 				container
 				spacing={3}
@@ -68,7 +154,13 @@ export default function College() {
 					lg={6}
 					md={12}
 				>
-					<CreateOptionDialog />
+					<Typography>更新学院</Typography>
+				</Grid2>
+				<Grid2
+					lg={6}
+					md={12}
+				>
+					<CreateOptionDialog setCollegeType={setCollegeType} />
 				</Grid2>
 				<Grid2
 					lg={6}
@@ -83,10 +175,54 @@ export default function College() {
 						</InputLabel>
 						<BootstrapInput
 							id="input"
-							placeholder="学院"
+							placeholder="输入新学院名称"
+							onChange={(event: ChangeEvent<HTMLInputElement>) => setCollegeName(event.target.value)}
 						/>
 					</FormControl>
 				</Grid2>
+				<Grid2
+					lg={6}
+					md={12}
+				>
+					<FormControl variant="standard">
+						<InputLabel
+							shrink
+							htmlFor="input"
+						>
+							学院介绍
+						</InputLabel>
+						<BootstrapInput
+							id="input"
+							placeholder="输入新学院介绍"
+							onChange={(event: ChangeEvent<HTMLInputElement>) => setCollegeInfo(event.target.value)}
+						/>
+					</FormControl>
+
+					<Grid2
+						lg={6}
+						md={12}
+					>
+						<Button
+							sx={{
+								width: '325px',
+								height: '46px',
+								fontSize: 18,
+							}}
+							variant="contained"
+							onClick={() => updateCollegeData(collegeType, collegeName, collegeInfo)}
+						>
+							更新
+						</Button>
+					</Grid2>
+				</Grid2>
+
+				<Grid2
+					lg={6}
+					md={12}
+				>
+					<Typography>添加学院</Typography>
+				</Grid2>
+
 				<Grid2
 					lg={6}
 					md={12}
@@ -100,9 +236,74 @@ export default function College() {
 						</InputLabel>
 						<BootstrapInput
 							id="input"
-							placeholder="学院"
+							placeholder="输入新学院名称"
 						/>
 					</FormControl>
+				</Grid2>
+				<Grid2
+					lg={6}
+					md={12}
+				>
+					<FormControl variant="standard">
+						<InputLabel
+							shrink
+							htmlFor="input"
+						>
+							学院介绍
+						</InputLabel>
+						<BootstrapInput
+							id="input"
+							placeholder="输入新学院介绍"
+						/>
+					</FormControl>
+				</Grid2>
+
+				<Grid2
+					lg={6}
+					md={12}
+				>
+					<Button
+						sx={{
+							width: '325px',
+							height: '46px',
+							fontSize: 18,
+						}}
+						variant="contained"
+						onClick={() => addCollegeData(collegeInfo, collegeName)}
+					>
+						添加
+					</Button>
+				</Grid2>
+
+				<Grid2
+					lg={6}
+					md={12}
+				>
+					<Typography>添加学院</Typography>
+				</Grid2>
+
+				<Grid2
+					lg={6}
+					md={12}
+				>
+					<CreateOptionDialog setCollegeType={setCollegeType} />
+				</Grid2>
+
+				<Grid2
+					lg={6}
+					md={12}
+				>
+					<Button
+						sx={{
+							width: '325px',
+							height: '46px',
+							fontSize: 18,
+						}}
+						variant="contained"
+						onClick={() => deleteCollegeData(collegeType)}
+					>
+						删除
+					</Button>
 				</Grid2>
 			</GridBox>
 		</Box>

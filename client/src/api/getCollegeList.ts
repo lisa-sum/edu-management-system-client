@@ -1,5 +1,5 @@
-export const getCollege = () => {
-	return fetch(import.meta.env.VITE_APP_COLLEGE_URL, {
+export const getCollegeList = (query = 'all') => {
+	return fetch(`${import.meta.env.VITE_APP_COLLEGE_URL}?query=${query}`, {
 		method: 'GET',
 		headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` },
 	}).then(async (res) => {

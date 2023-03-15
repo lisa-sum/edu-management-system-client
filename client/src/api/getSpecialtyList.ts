@@ -1,5 +1,5 @@
-export const getSpecialtyList = () => {
-	return fetch(`${import.meta.env.VITE_APP_SPECIALTY_LIST}?specialty=all`, {
+export const getSpecialtyList = (query = 'all') => {
+	return fetch(`${import.meta.env.VITE_APP_SPECIALTY_LIST}?query=${query}`, {
 		method: 'GET',
 		headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` },
 	}).then(async (res) => {
