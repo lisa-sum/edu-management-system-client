@@ -4,6 +4,7 @@ import { useState } from 'react'
 import InputAssist from '@/components/inputAssist'
 import SendMessage from '@/components/SendMessage'
 import { RootState } from '@/store/index'
+import { MessageBasic } from '@/type'
 import { useAppSelector } from '@/utils/hooks/index'
 
 export default function Room() {

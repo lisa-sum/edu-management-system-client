@@ -1,3 +1,5 @@
+import { Users } from '@/type'
+
 type UserBasicResponse = {
 	body: {
 		data: Users

@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import { getSpecialtyList } from '@/api/getSpecialtyList'
 import { updateSpecialty } from '@/features/user/specialty'
 import { RootState } from '@/store/index'
-import { Specialty } from '@/type/index'
+import { Specialty } from '@/type'
 import { useAppDispatch } from '@/utils/hooks/index'
 
 export default function Grouped({ setOldName }: { setOldName: Dispatch<SetStateAction<string>> }) {
@@ -20,7 +20,7 @@ export default function Grouped({ setOldName }: { setOldName: Dispatch<SetStateA
 			.catch((err) => {
 				console.error(err)
 			})
-	}, [])
+	}, [dispatch])
 
 	//	const options = setSpecialtyList.map((option) => {
 	//		return {

@@ -1,5 +1,7 @@
 import { useState } from 'react'
 
+import { MessageBasic } from '@/type'
+
 const getHistoryMessage = () => {
 	// 获取消息列表
 	fetch('http://127.0.0.1:4000/historyMessage', {

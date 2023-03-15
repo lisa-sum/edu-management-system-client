@@ -1,6 +1,8 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { createSlice } from '@reduxjs/toolkit'
 
+import { MessageBasic } from '@/type'
+
 const initialState: { value: { messageList: MessageBasic[] } } = {
 	value: {
 		messageList: [

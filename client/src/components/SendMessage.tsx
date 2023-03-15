@@ -2,6 +2,7 @@ import { Send as SendIcon } from '@mui/icons-material'
 import { Box, Button } from '@mui/material'
 
 import { updateMessage } from '@/features/im/message'
+import { MessageBasic } from '@/type'
 import { useAppDispatch } from '@/utils/hooks/index'
 import { messageBasic } from '@/utils/message'
 

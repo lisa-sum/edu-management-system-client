@@ -26,6 +26,7 @@ import studentIco from '@/assets/icons/student.svg'
 import teacherIco from '@/assets/icons/teacher.svg'
 import Chat from '@/pages/im/chat'
 import { RootState } from '@/store/index'
+import { RouteList } from '@/type'
 import { useAppSelector } from '@/utils/hooks/index'
 
 type ListIcons = {

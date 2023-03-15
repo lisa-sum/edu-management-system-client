@@ -4,6 +4,7 @@ import { Suspense, useEffect, useState } from 'react'
 import Room from '@/components/Room'
 import { activeRoom } from '@/features/im/room'
 import { RootState } from '@/store/index'
+import { RoomBasic } from '@/type'
 import { useAppDispatch, useAppSelector } from '@/utils/hooks/index'
 
 export default function Chat() {

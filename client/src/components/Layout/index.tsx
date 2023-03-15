@@ -22,6 +22,7 @@ import Profile from '@/pages/role/student/Profile'
 import Schedule from '@/pages/role/student/Schedule/index'
 // Student Page End
 import { RootState } from '@/store/index'
+import { RouteList } from '@/type'
 import { useAppDispatch, useAppSelector } from '@/utils/hooks/index'
 
 // Teacher Router
