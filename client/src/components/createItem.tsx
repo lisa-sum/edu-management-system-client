@@ -3,7 +3,7 @@ import CircularProgress from '@mui/material/CircularProgress'
 import TextField from '@mui/material/TextField'
 import { Dispatch, SetStateAction, SyntheticEvent, useEffect, useState } from 'react'
 
-import { getCollegeList } from '@/api/getCollegeList'
+import { getCollegeList } from '@/api/college'
 import { CollegeList } from '@/type'
 
 export default function CreateOptionDialog({ setCollegeType }: { setCollegeType: Dispatch<SetStateAction<string>> }) {
