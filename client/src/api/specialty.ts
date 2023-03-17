@@ -1,10 +1,10 @@
 /**
  * @description 获取专业列表
  * @since 17/03/2023 11:50 am
- * @param query {'all' | 'name'} 查询条件
+ * @param query {'all' | string} 查询条件
  * @return 专业列表
  *  */
-export const getSpecialtyList = (query = 'all') => {
+export const getSpecialty = (query = 'all') => {
 	return fetch(`${import.meta.env.VITE_APP_SPECIALTY_LIST}?query=${query}`, {
 		method: 'GET',
 		headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` },

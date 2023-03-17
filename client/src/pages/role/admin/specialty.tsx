@@ -2,7 +2,7 @@ import { alpha, Box, Button, FormControl, InputBase, InputLabel, styled } from '
 import Grid2 from '@mui/material/Unstable_Grid2'
 import { ChangeEvent, useState } from 'react'
 
-import { updateSpecialty } from '@/api/updateSpecialty'
+import { updateSpecialtyOne } from '@/api/specialty'
 import Grouped from '@/components/grouped'
 
 const GridBox = styled(Grid2)(({ theme }) => ({
@@ -65,7 +65,7 @@ export default function Specialty() {
 	const [info, setInfo] = useState<string>('')
 
 	const updateSpecialtyData = (oldName: string, name: string, info: string) => {
-		updateSpecialty(oldName, name, info)
+		updateSpecialtyOne(oldName, name, info)
 			.then((res) => {
 				console.log(res)
 			})

@@ -2,9 +2,7 @@ import { Alert, alpha, Box, Button, FormControl, InputBase, InputLabel, styled, 
 import Grid2 from '@mui/material/Unstable_Grid2'
 import { ChangeEvent, useState } from 'react'
 
-import { addCollege } from '@/api/addCollege'
-import { deleteCollege } from '@/api/deleteCollege'
-import { updateCollege } from '@/api/updateCollege'
+import { addCollege, deleteCollege, updateCollege } from '@/api/college'
 import CreateOptionDialog from '@/components/createItem'
 import { Status } from '@/type'
 

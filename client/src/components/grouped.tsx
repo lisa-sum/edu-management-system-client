@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField'
 import { Dispatch, SetStateAction, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
-import { getSpecialtyList } from '@/api/getSpecialtyList'
+import { getSpecialty } from '@/api/specialty'
 import { updateSpecialty } from '@/features/user/specialty'
 import { RootState } from '@/store/index'
 import { Specialty } from '@/type'
@@ -13,8 +13,9 @@ export default function Grouped({ setOldName }: { setOldName: Dispatch<SetStateA
 	const setSpecialtyList = useSelector((state: RootState) => state.specialty.value.specialtyList)
 	const dispatch = useAppDispatch()
 	useEffect(() => {
-		getSpecialtyList('all')
+		getSpecialty()
 			.then((res) => {
+				console.log(res)
 				dispatch(updateSpecialty(res.body))
 			})
 			.catch((err) => {
