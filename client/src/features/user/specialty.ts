@@ -20,7 +20,6 @@ export const specialtySlice = createSlice({
 	initialState,
 	reducers: {
 		updateSpecialty(state, { payload }: PayloadAction<Specialty[]>) {
-			console.log(payload)
 			state.value.specialtyList = payload
 		},
 	},

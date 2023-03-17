@@ -12,7 +12,6 @@ export default function CreateOptionDialog({ setCollegeType }: { setCollegeType:
 	const loading = open && options.length === 0
 
 	useEffect(() => {
-		//		let active = true
 		getCollegeList()
 			.then((res: CollegeList[]) => {
 				console.log(res)

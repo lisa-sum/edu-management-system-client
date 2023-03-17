@@ -60,8 +60,8 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
 	},
 }))
 
-const updateCollegeData = (collegeType: string, collegeName: string, collegeInfo: string) => {
-	updateCollege(collegeType, collegeName, collegeInfo)
+const updateCollegeData = async (collegeType: string, collegeName: string, collegeInfo: string) => {
+	await updateCollege(collegeType, collegeName, collegeInfo)
 		.then((res) => {
 			console.log(res)
 		})
@@ -81,7 +81,7 @@ export default function College() {
 		body: '',
 		state: 'success',
 	})
-	const addCollegeData = (collegeName: string, collegeInfo: string) => {
+	const addCollegeData = async (collegeName: string, collegeInfo: string) => {
 		if (collegeName === '' || collegeInfo === '') {
 			setShow(true)
 			setStatus({
@@ -90,7 +90,7 @@ export default function College() {
 			})
 			return
 		}
-		addCollege(collegeName, collegeInfo)
+		await addCollege(collegeName, collegeInfo)
 			.then((res) => {
 				console.log(res)
 				setShow(true)
@@ -111,8 +111,8 @@ export default function College() {
 			})
 	}
 
-	const deleteCollegeData = (collegeType: string) => {
-		deleteCollege(collegeType)
+	const deleteCollegeData = async (collegeType: string) => {
+		await deleteCollege(collegeType)
 			.then((res) => {
 				console.log(res)
 				if (res.body.DeletedCount === 0) {

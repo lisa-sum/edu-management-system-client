@@ -4,13 +4,13 @@
  * @param query {'all' | string} 查询条件
  * @return 专业列表
  *  */
-export const getSpecialty = (query = 'all') => {
-	return fetch(`${import.meta.env.VITE_APP_SPECIALTY_LIST}?query=${query}`, {
+export const getSpecialty = async (query = 'all') => {
+	return await fetch(`${import.meta.env.VITE_APP_SPECIALTY}?query=${query}`, {
 		method: 'GET',
 		headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` },
 	}).then(async (res) => {
 		const result = await res.json()
-		if ((result.code >= 200 && result.code < 400) || res.body !== null) {
+		if ((result.code >= 200 && result.code < 400) || result.body !== null) {
 			return result
 		}
 		throw new Error(result.message)
@@ -22,17 +22,17 @@ export const getSpecialty = (query = 'all') => {
  * @since 17/03/2023 11:48 am
  * @param oldSpecialtyName {string} 原专业名称
  * @param newSpecialtyName {string} 新专业名称
- * @param newCollegeDescription {string} 新专业描述
+ * @param newSpecialtyDescription {string} 新专业描述
  * @return 修改信息
  *  */
-export const updateSpecialtyOne = (oldSpecialtyName: string, newSpecialtyName: string, newCollegeDescription: string) => {
-	return fetch(`${import.meta.env.VITE_APP_COLLEGE_URL}`, {
+export const updateSpecialtyOne = async (oldSpecialtyName: string, newSpecialtyName: string, newSpecialtyDescription: string) => {
+	return await fetch(`${import.meta.env.VITE_APP_SPECIALTY}`, {
 		method: 'PATCH',
 		headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` },
 		body: JSON.stringify({
 			oldSpecialtyName,
-			newCollegeDescription,
 			newSpecialtyName,
+			newSpecialtyDescription,
 		}),
 	}).then(async (res) => {
 		const result = await res.json()

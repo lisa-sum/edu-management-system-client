@@ -64,8 +64,8 @@ export default function Specialty() {
 	const [name, setName] = useState<string>('')
 	const [info, setInfo] = useState<string>('')
 
-	const updateSpecialtyData = (oldName: string, name: string, info: string) => {
-		updateSpecialtyOne(oldName, name, info)
+	const updateSpecialtyData = async (oldName: string, name: string, info: string) => {
+		await updateSpecialtyOne(oldName, name, info)
 			.then((res) => {
 				console.log(res)
 			})

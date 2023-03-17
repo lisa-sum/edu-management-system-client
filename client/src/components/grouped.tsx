@@ -13,14 +13,15 @@ export default function Grouped({ setOldName }: { setOldName: Dispatch<SetStateA
 	const setSpecialtyList = useSelector((state: RootState) => state.specialty.value.specialtyList)
 	const dispatch = useAppDispatch()
 	useEffect(() => {
-		getSpecialty()
-			.then((res) => {
-				console.log(res)
-				dispatch(updateSpecialty(res.body))
-			})
-			.catch((err) => {
-				console.error(err)
-			})
+		;(async () => {
+			await getSpecialty()
+				.then((res) => {
+					dispatch(updateSpecialty(res.body))
+				})
+				.catch((err) => {
+					console.error(err)
+				})
+		})()
 	}, [dispatch])
 
 	//	const options = setSpecialtyList.map((option) => {
@@ -33,7 +34,7 @@ export default function Grouped({ setOldName }: { setOldName: Dispatch<SetStateA
 		<Autocomplete
 			getOptionLabel={(option) => option.name}
 			groupBy={(option) => option.college}
-			id="grouped-demo"
+			id="grouped"
 			options={setSpecialtyList}
 			renderInput={(params) => (
 				<TextField
