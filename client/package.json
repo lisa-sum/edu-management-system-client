@@ -30,7 +30,8 @@
 	"scripts": {
 		"dev:local": "vite --mode _local",
 		"dev:produ": "vite --mode release",
-		"build": "vite build --mode release",
+		"build": "vite build",
+		"build:produ": "vite build --mode release",
 		"preview": "vite preview",
 		"tauri": "tauri",
 		"eslint": "eslint src/**/**.ts src/**/**.tsx",
@@ -50,7 +51,8 @@
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-redux": "^8.0.5",
-		"react-router-dom": "^6.4.4"
+		"react-router-dom": "^6.4.4",
+		"vite-plugin-compression": "^0.5.1"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.20.2",
