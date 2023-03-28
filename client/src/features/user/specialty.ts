@@ -3,8 +3,9 @@ import { createSlice } from '@reduxjs/toolkit'
 
 import { Specialty } from '@/type'
 
-const initialState: { value: { specialtyList: Specialty[] } } = {
+const initialState: { value: { specialtyName: string; specialtyList: Specialty[] } } = {
 	value: {
+		specialtyName: '',
 		specialtyList: [
 			{
 				name: '',
@@ -19,13 +20,17 @@ export const specialtySlice = createSlice({
 	name: 'specialty',
 	initialState,
 	reducers: {
-		updateSpecialty(state, { payload }: PayloadAction<Specialty[]>) {
+		updateSpecialtyName(state, { payload }: PayloadAction<string>) {
+			console.log(payload)
+			state.value.specialtyName = payload
+		},
+		updateSpecialtyList(state, { payload }: PayloadAction<Specialty[]>) {
 			state.value.specialtyList = payload
 		},
 	},
 })
 
 // Action creators are generated for each case reducer function
-export const { updateSpecialty } = specialtySlice.actions
+export const { updateSpecialtyName, updateSpecialtyList } = specialtySlice.actions
 
 export default specialtySlice.reducer

@@ -3,7 +3,7 @@ import Grid2 from '@mui/material/Unstable_Grid2'
 import { ChangeEvent, useState } from 'react'
 
 import { addCollege, deleteCollege, updateCollege } from '@/api/college'
-import CreateOptionDialog from '@/components/createItem'
+import SelectCollege from '@/components/selectCollege'
 import { Status } from '@/type'
 
 const GridBox = styled(Grid2)(({ theme }) => ({
@@ -158,7 +158,7 @@ export default function College() {
 					lg={6}
 					md={12}
 				>
-					<CreateOptionDialog setCollegeType={setCollegeType} />
+					<SelectCollege setCollegeType={setCollegeType} />
 				</Grid2>
 				<Grid2
 					lg={6}
@@ -284,7 +284,7 @@ export default function College() {
 					lg={6}
 					md={12}
 				>
-					<CreateOptionDialog setCollegeType={setCollegeType} />
+					<SelectCollege setCollegeType={setCollegeType} />
 				</Grid2>
 
 				<Grid2

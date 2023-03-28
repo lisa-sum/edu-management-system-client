@@ -1,14 +1,14 @@
 // 路由结构
 import { AlertColor } from '@mui/material'
 
-type RouteList = {
+export type RouteList = {
 	element: JSX.Element
 	path: string
 	label: string
 }
 
 // users结构
-type Users = {
+export type Users = {
 	role: string
 	account: string
 	username: string
@@ -18,7 +18,7 @@ type Users = {
 }
 
 // user_admins 管理员角色结构
-type AdminBasic = {
+export type AdminBasic = {
 	account: string
 	avatar: string
 	createdTime?: string
@@ -28,7 +28,7 @@ type AdminBasic = {
 }
 
 // user_students 学生角色结构
-type StudentBasic = {
+export type StudentBasic = {
 	account: string
 	address: string
 	avatar: string
@@ -44,7 +44,7 @@ type StudentBasic = {
 }
 
 // user_teachers教师角色结构
-type TeacherBasic = {
+export type TeacherBasic = {
 	account: string
 	address: string
 	avatar: string
@@ -60,7 +60,7 @@ type TeacherBasic = {
 }
 
 // im 群聊结构
-type RoomBasic = {
+export type RoomBasic = {
 	userIdentity: string
 	avatar: string
 	info: string
@@ -71,7 +71,7 @@ type RoomBasic = {
 }
 
 // im 消息结构
-type MessageBasic = {
+export type MessageBasic = {
 	userIdentity: string
 	roomIdentity: string
 	data: any
@@ -80,23 +80,31 @@ type MessageBasic = {
 }
 
 // 学院列表
-type CollegeList = {
+export type CollegeList = {
 	inputValue?: string
 	name: string
 	info: string
 }
 
 // 专业列表
-type Specialty = {
+export type Specialty = {
 	name: string
 	college: string
 	code: string
 }
 
 // 标准返回状态
-type Status = {
+export type Status = {
 	code?: number
 	message: string
 	body?: any
 	state: AlertColor
+}
+
+// 班级列表
+export type ClassList = {
+	name: string
+	specialty: string
+	class_name: string
+	population: number
 }

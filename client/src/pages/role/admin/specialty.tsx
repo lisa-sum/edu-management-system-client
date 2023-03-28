@@ -3,7 +3,7 @@ import Grid2 from '@mui/material/Unstable_Grid2'
 import { ChangeEvent, useState } from 'react'
 
 import { updateSpecialtyOne } from '@/api/specialty'
-import Grouped from '@/components/grouped'
+import SelectSpecialty from '@/components/selectSpecialty'
 
 const GridBox = styled(Grid2)(({ theme }) => ({
 	[theme.breakpoints.down('md')]: {
@@ -83,7 +83,7 @@ export default function Specialty() {
 					lg={6}
 					md={12}
 				>
-					<Grouped setOldName={setOldName} />
+					<SelectSpecialty setName={setOldName} />
 				</Grid2>
 
 				<Grid2
