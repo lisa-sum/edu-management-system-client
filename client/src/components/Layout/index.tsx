@@ -1,7 +1,8 @@
-import { Alert, AlertTitle, Button } from '@mui/material'
+import { Alert, AlertTitle, Box, Button, Link, Typography } from '@mui/material'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import beianIco from '@/assets/icons/beian.png'
 import AppBar from '@/components/Layout/AppBar'
 import { toggleRole } from '@/features/user/profile'
 import Chat from '@/pages/im/chat'
@@ -22,7 +23,7 @@ import Profile from '@/pages/role/student/Profile'
 import Schedule from '@/pages/role/student/Schedule/index'
 // Student Page End
 import { RootState } from '@/store/index'
-import { RouteList } from '@/type'
+import type { RouteList } from '@/type'
 import { useAppDispatch, useAppSelector } from '@/utils/hooks/index'
 
 // Teacher Router
@@ -129,18 +130,48 @@ export default function Layout() {
 		// 未登录状态(访客)
 		default:
 			return (
-				<Alert severity="info">
-					<AlertTitle>提示</AlertTitle>
-					你还没有登录,请
-					<Button
-						onClick={() => {
-							dispatch(toggleRole('visitor'))
-							navigate('login')
+				<>
+					<Alert severity="info">
+						<AlertTitle>提示</AlertTitle>
+						你还没有登录,请
+						<Button
+							onClick={() => {
+								dispatch(toggleRole('visitor'))
+								navigate('login')
+							}}
+						>
+							登录
+						</Button>
+					</Alert>
+					<Box
+						sx={{
+							position: 'fixed',
+							width: '50vw',
+							textAlign: 'center',
+							mx: 'auto',
+							bottom: 0,
+							columnCount: 3,
 						}}
 					>
-						登录
-					</Button>
-				</Alert>
+						<Box
+							component="img"
+							src={beianIco}
+						/>
+						<Link
+							href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=45062102000015"
+							target="_blank"
+						>
+							桂公网安备45062102000015号
+						</Link>
+						<Typography>桂ICP备2022004535号</Typography>
+						<Link
+							href="https://beian.miit.gov.cn/"
+							target="_blank"
+						>
+							桂ICP备2022004535号-2
+						</Link>
+					</Box>
+				</>
 			)
 	}
 }
