@@ -16,15 +16,15 @@ import Specialty from '@/pages/role/admin/specialty'
 import Teacher from '@/pages/role/admin/teacher'
 // Admin Page End
 // Student Page Start
-import ApplyForClassRoom from '@/pages/role/student/ApplyForClassRoom/index'
-import DropOut from '@/pages/role/student/DropOut/index'
-import Inquiry from '@/pages/role/student/Inquiry/index'
+import ApplyForClassRoom from '@/pages/role/student/ApplyForClassRoom'
+import DropOut from '@/pages/role/student/DropOut'
+import Inquiry from '@/pages/role/student/Inquiry'
 import Profile from '@/pages/role/student/Profile'
-import Schedule from '@/pages/role/student/Schedule/index'
+import Schedule from '@/pages/role/student/Schedule'
 // Student Page End
-import { RootState } from '@/store/index'
+import { RootState } from '@/store'
 import type { RouteList } from '@/type'
-import { useAppDispatch, useAppSelector } from '@/utils/hooks/index'
+import { useAppDispatch, useAppSelector } from '@/utils/hooks'
 
 // Teacher Router
 const teacherRoutes: RouteList[] = [

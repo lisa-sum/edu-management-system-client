@@ -1,7 +1,7 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { createSlice } from '@reduxjs/toolkit'
 
-import { AdminBasic, StudentBasic, TeacherBasic } from '@/type'
+import type { AdminBasic, StudentBasic, TeacherBasic } from '@/type'
 
 const initialState: {
 	value: {

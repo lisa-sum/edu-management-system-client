@@ -2,8 +2,8 @@ import { Send as SendIcon } from '@mui/icons-material'
 import { Box, Button } from '@mui/material'
 
 import { updateMessage } from '@/features/im/message'
-import { MessageBasic } from '@/type'
-import { useAppDispatch } from '@/utils/hooks/index'
+import type { MessageBasic } from '@/type'
+import { useAppDispatch } from '@/utils/hooks'
 import { messageBasic } from '@/utils/message'
 
 export default function SendMessage({ msg }: { msg: MessageBasic }) {

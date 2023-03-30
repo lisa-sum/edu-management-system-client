@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { MessageBasic } from '@/type'
+import type { MessageBasic } from '@/type'
 
 const getHistoryMessage = () => {
 	// 获取消息列表

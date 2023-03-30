@@ -1,65 +1,37 @@
 import Autocomplete from '@mui/material/Autocomplete'
 import TextField from '@mui/material/TextField'
-import { Dispatch, SetStateAction, useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useEffect, useState } from 'react'
 
-import { getSpecialty } from '@/api/specialty'
-import { updateSpecialtyList } from '@/features/user/specialty'
-import { RootState } from '@/store/index'
-import { Specialty } from '@/type/index'
-import { useAppDispatch } from '@/utils/hooks/index'
+import type { Specialty as SpecialtyType } from '@/type'
+import { fetcher } from '@/utils/fether'
 
-export default function SelectSpecialty({ setName }: { setName?: Dispatch<SetStateAction<string>> }) {
-	const setSpecialtyList = useSelector((state: RootState) => state.specialty.value.specialtyList)
-	const dispatch = useAppDispatch()
-	useEffect(() => {
-		;(async () => {
-			await getSpecialty()
-				.then((res) => {
-					dispatch(updateSpecialtyList(res.body))
-				})
-				.catch((err) => {
-					console.error(err)
-				})
-		})()
-	}, [dispatch])
+export default function SelectSpecialty({ college }: { college?: string }) {
+	const [specialtyList, setSpecialtyList] = useState<SpecialtyType[]>([])
 
-	if (setName) {
-		return (
-			<Autocomplete
-				getOptionLabel={(option) => option.name}
-				groupBy={(option) => option.college}
-				id="grouped"
-				options={setSpecialtyList}
-				renderInput={(params) => (
-					<TextField
-						{...params}
-						label="选择一个专业"
-					/>
-				)}
-				sx={{
-					width: '400px',
-				}}
-				onChange={(_, value: Specialty | null) => setName(value?.name || '')}
-			/>
-		)
+	if (college) {
+		fetcher(`${import.meta.env.VITE_APP_SPECIALTY}?college=${college}`).then(async (res) => {
+			setSpecialtyList(res.body)
+		})
 	}
+	useEffect(() => {
+		fetcher(`${import.meta.env.VITE_APP_SPECIALTY}?query=all`).then(async (res) => {
+			setSpecialtyList(res.body)
+		})
+	}, [])
 
 	return (
 		<Autocomplete
+			disablePortal
 			getOptionLabel={(option) => option.name}
-			groupBy={(option) => option.college}
-			id="grouped"
-			options={setSpecialtyList}
+			id="select-class"
+			options={specialtyList}
 			renderInput={(params) => (
 				<TextField
 					{...params}
-					label="选择一个专业"
+					label="选择专业"
 				/>
 			)}
-			sx={{
-				width: '400px',
-			}}
+			sx={{ width: '400px' }}
 		/>
 	)
 }

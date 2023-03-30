@@ -4,7 +4,7 @@ import { ChangeEvent, useState } from 'react'
 
 import { addCollege, deleteCollege, updateCollege } from '@/api/college'
 import SelectCollege from '@/components/selectCollege'
-import { Status } from '@/type'
+import type { Status } from '@/type'
 
 const GridBox = styled(Grid2)(({ theme }) => ({
 	[theme.breakpoints.down('md')]: {
@@ -75,7 +75,7 @@ export default function College() {
 	const [collegeInfo, setCollegeInfo] = useState<string>('')
 	const [collegeName, setCollegeName] = useState<string>('')
 	const [show, setShow] = useState<boolean>(false)
-	const [status, setStatus] = useState<Status>({
+	const [status, setStatus] = useState<Status<any>>({
 		code: 200,
 		message: '',
 		body: '',
@@ -85,6 +85,7 @@ export default function College() {
 		if (collegeName === '' || collegeInfo === '') {
 			setShow(true)
 			setStatus({
+				body: '',
 				state: 'error',
 				message: '数据不能为空, 请输入数据!',
 			})
@@ -118,6 +119,7 @@ export default function College() {
 				if (res.body.DeletedCount === 0) {
 					console.log(1)
 					setStatus({
+						body: '',
 						message: '该数据已经删除, 请刷新页面',
 						state: 'info',
 					})

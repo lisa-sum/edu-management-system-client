@@ -4,16 +4,16 @@ import TextField from '@mui/material/TextField'
 import { Dispatch, SetStateAction, SyntheticEvent, useEffect, useState } from 'react'
 
 import { getCollegeList } from '@/api/college'
-import { CollegeList } from '@/type'
+import type { College } from '@/type'
 
 export default function SelectCollege({ setCollegeType }: { setCollegeType?: Dispatch<SetStateAction<string>> }) {
 	const [open, setOpen] = useState(false)
-	const [options, setOptions] = useState<readonly CollegeList[]>([])
+	const [options, setOptions] = useState<readonly College[]>([])
 	const loading = open && options.length === 0
 
 	useEffect(() => {
 		getCollegeList()
-			.then((res: { body: CollegeList[] }) => {
+			.then((res: { body: College[] }) => {
 				setOptions([...res.body])
 			})
 			.catch((err) => {
@@ -61,7 +61,7 @@ export default function SelectCollege({ setCollegeType }: { setCollegeType?: Dis
 					/>
 				)}
 				sx={{ width: 300 }}
-				onChange={(_event: SyntheticEvent<Element, Event>, newValue: CollegeList | null) => {
+				onChange={(_event: SyntheticEvent<Element, Event>, newValue: College | null) => {
 					setCollegeType(newValue?.name || '')
 				}}
 				onClose={() => {

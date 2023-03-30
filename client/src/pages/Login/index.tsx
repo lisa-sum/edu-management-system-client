@@ -9,7 +9,7 @@ import student from '@/assets/images/团队-1.svg'
 import defaultAvatar from '@/assets/images/头像-默认.svg'
 import { pwdVerifyRex, usrVerifyRex } from '@/config/verify'
 import { toggleRole, updateUserInfo } from '@/features/user/profile'
-import { useAppDispatch } from '@/utils/hooks/index'
+import { useAppDispatch } from '@/utils/hooks'
 
 const LoginSubmit = ({
 	usr,

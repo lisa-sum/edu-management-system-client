@@ -80,7 +80,7 @@ export type MessageBasic = {
 }
 
 // 学院列表
-export type CollegeList = {
+export type College = {
 	inputValue?: string
 	name: string
 	info: string
@@ -88,16 +88,17 @@ export type CollegeList = {
 
 // 专业列表
 export type Specialty = {
-	name: string
-	college: string
 	code: string
+	college: string
+	description: string
+	name: string
 }
 
 // 标准返回状态
-export type Status = {
+export type Status<T> = {
 	code?: number
 	message: string
-	body?: any
+	body: T
 	state: AlertColor
 }
 
@@ -105,6 +106,6 @@ export type Status = {
 export type ClassList = {
 	name: string
 	specialty: string
-	class_name: string
+	className: string
 	population: number
 }

@@ -1,9 +1,12 @@
 import { alpha, Box, Button, FormControl, InputBase, InputLabel, styled } from '@mui/material'
+import Autocomplete from '@mui/material/Autocomplete'
+import TextField from '@mui/material/TextField'
 import Grid2 from '@mui/material/Unstable_Grid2'
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 
 import { updateSpecialtyOne } from '@/api/specialty'
-import SelectSpecialty from '@/components/selectSpecialty'
+import type { Specialty as SpecialtyType, Status } from '@/type'
+import { fetcher } from '@/utils/fether'
 
 const GridBox = styled(Grid2)(({ theme }) => ({
 	[theme.breakpoints.down('md')]: {
@@ -63,16 +66,24 @@ export default function Specialty() {
 	const [oldName, setOldName] = useState<string>('')
 	const [name, setName] = useState<string>('')
 	const [info, setInfo] = useState<string>('')
+	const [specialtyList, setSpecialtyList] = useState<SpecialtyType[]>([])
+
+	useEffect(() => {
+		fetcher(`${import.meta.env.VITE_APP_SPECIALTY}?query=all`).then((res: Status<SpecialtyType[]>) => {
+			return setSpecialtyList(res.body)
+		})
+	}, [])
 
 	const updateSpecialtyData = async (oldName: string, name: string, info: string) => {
 		await updateSpecialtyOne(oldName, name, info)
 			.then((res) => {
-				console.log(res)
+				console.log(res.body)
 			})
 			.catch((err) => {
 				console.error(err)
 			})
 	}
+
 	return (
 		<Box>
 			<GridBox
@@ -83,7 +94,22 @@ export default function Specialty() {
 					lg={6}
 					md={12}
 				>
-					<SelectSpecialty setName={setOldName} />
+					<Autocomplete
+						getOptionLabel={(option) => option.name}
+						groupBy={(option) => option.college}
+						id="grouped"
+						options={specialtyList}
+						renderInput={(params) => (
+							<TextField
+								{...params}
+								label="选择一个专业"
+							/>
+						)}
+						sx={{
+							width: '400px',
+						}}
+						onChange={(_, value: SpecialtyType | null) => setOldName(value?.name || '')}
+					/>
 				</Grid2>
 
 				<Grid2

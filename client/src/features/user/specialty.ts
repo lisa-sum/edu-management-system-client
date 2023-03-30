@@ -1,16 +1,17 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { createSlice } from '@reduxjs/toolkit'
 
-import { Specialty } from '@/type'
+import type { Specialty } from '@/type'
 
 const initialState: { value: { specialtyName: string; specialtyList: Specialty[] } } = {
 	value: {
 		specialtyName: '',
 		specialtyList: [
 			{
-				name: '',
-				college: '',
 				code: '',
+				college: '',
+				description: '',
+				name: '',
 			},
 		],
 	},

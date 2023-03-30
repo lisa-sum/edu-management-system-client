@@ -1,4 +1,4 @@
-import { Users } from '@/type'
+import type { Users } from '@/type'
 
 type UserBasicResponse = {
 	body: {

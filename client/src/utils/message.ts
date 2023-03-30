@@ -1,4 +1,4 @@
-import { MessageBasic } from '@/type'
+import type { MessageBasic } from '@/type'
 
 const notUpdatedMessage = (userIdentity: string, roomIdentity: string, data: any, updatedTime: number | string): MessageBasic => {
 	return {

@@ -3,11 +3,11 @@ import type { Status } from '@/type'
 const METHODS = ['POST', 'PUT', 'PATCH']
 export const fetcher = async (
 	uri: string = import.meta.env.VITE_APP_BASE,
-	method: string,
+	method = 'GET',
 	query?: string,
+	params?: string,
 	body?: any,
-	params?: { [key: string]: string },
-): Promise<Status> => {
+): Promise<Status<any>> => {
 	if (METHODS.includes(method.toUpperCase())) {
 		return await fetch(uri, {
 			method,
@@ -22,12 +22,12 @@ export const fetcher = async (
 				throw new Error('请求失败')
 			})
 			.catch((err) => {
-				console.error(err)
+				return err
 			})
 	}
 	const queryStr = query ? `?query=${query}` : ''
 	const paramList = params ? `?${params}` : ''
-	return await fetch(`${uri}${queryStr}${paramList}}`, {
+	return await fetch(`${uri}${queryStr}${paramList}`, {
 		method,
 		headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` },
 	})

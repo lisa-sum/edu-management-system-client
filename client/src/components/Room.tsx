@@ -3,9 +3,9 @@ import { useState } from 'react'
 
 import InputAssist from '@/components/inputAssist'
 import SendMessage from '@/components/SendMessage'
-import { RootState } from '@/store/index'
-import { MessageBasic } from '@/type'
-import { useAppSelector } from '@/utils/hooks/index'
+import { RootState } from '@/store'
+import type { MessageBasic } from '@/type'
+import { useAppSelector } from '@/utils/hooks'
 
 export default function Room() {
 	const messageList = useAppSelector((state: RootState) => state.message.value.messageList)
