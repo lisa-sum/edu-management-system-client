@@ -3,8 +3,10 @@ stages:
   - deploy
 
 cache:
-  - ./node_modules
-  - ./client/node_modules
+  key: edu_system
+  paths:
+    - ./node_modules
+    - ./client/node_modules
 
 job_web:
   stage: web
