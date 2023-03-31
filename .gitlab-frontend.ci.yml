@@ -3,10 +3,10 @@ stages:
   - deploy
 
 cache:
-  key: edu_system
+  key: edu_system_client
   paths:
-    - ./node_modules
-    - ./client/node_modules
+    - "$CI_PROJECT_DIR$"/node_modules
+    - "$CI_PROJECT_DIR$"/client/node_modules
 
 job_web:
   stage: web
@@ -18,7 +18,9 @@ job_web:
     - npm install pnpm -g
     - pnpm install
     - cd ./client
-    - pnpm install --no-frozen-lockfile #不使用锁文件下载包
+    # 从缓存获取
+    - export PNPM_REGISTRY=local
+    - PNPM_REGISTRY=local pnpm install --no-frozen-lockfile #不使用锁文件下载包
     #    - pnpm install
     - pnpm eslint:fix
     - pnpm stylelint:fix
