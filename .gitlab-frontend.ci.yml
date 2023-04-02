@@ -7,6 +7,7 @@ cache:
   paths:
     - ./node_modules
     - ./client/node_modules
+    - ./tag.txt
 
 job_web:
   stage: web
@@ -25,6 +26,7 @@ job_web:
     - pnpm eslint:fix
     - pnpm stylelint:fix
     - pnpm build:produ
+    - ls
   only:
     - main
   # 提供打包好的文件
