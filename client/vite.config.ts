@@ -9,7 +9,7 @@ import { defineConfig } from 'vite'
 export default defineConfig({
 	plugins: [
 		react(),
-		basicSSL(),
+		// basicSSL(),
 		// 压缩配置
 		//		viteCompression({
 		//			verbose: true,

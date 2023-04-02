@@ -14,26 +14,22 @@ import { useAppDispatch } from '@/utils/hooks'
 const LoginSubmit = ({
 	usr,
 	pwd,
-	loading,
-	setLoading,
+
 	setLoadingIndicator,
 	setErrorStatus,
 }: {
 	usr: string
 	pwd: string
-	loading: boolean
-	setLoading: (boolean: boolean) => void
 	setLoadingIndicator: (statusText: string) => void
 	setErrorStatus: (status: boolean) => void
 }) => {
 	const dispatch = useAppDispatch()
 	const navigate = useNavigate()
-	const getProfile = (usr: string, pwd: string, setLoading: (boolean: boolean) => void) => {
-		setLoading(true)
+	const getProfile = (usr: string, pwd: string) => {
 		getAuthLogin(usr, pwd)
 			.then((res) => {
 				setLoadingIndicator(res.message)
-				setLoading(false) // 按钮禁用状态
+
 				const { role, username, account, avatar } = res.body.data
 				dispatch(updateUserInfo({ role, account, username, avatar }))
 				localStorage.setItem('token', res.body.token) // 设置token
@@ -57,13 +53,11 @@ const LoginSubmit = ({
 
 	return (
 		<LoadingButton
-			loading={loading}
 			loadingIndicator="登录中..."
 			sx={{ width: '200px' }}
 			variant="outlined"
 			onClick={() => {
-				setLoading(true)
-				getProfile(usr, pwd, setLoading)
+				getProfile(usr, pwd)
 			}}
 		>
 			Submit
@@ -110,7 +104,6 @@ export default function Login() {
 	const [pwdInputStatus, setPwdInputStatus] = useState<boolean>(false) // 密码是否校验错误的边框提示
 	const [usrHelperText, setUsrHelperText] = useState<string>('请输入账号') // 账号是否校验错误的文字提示
 	const [pwdHelperText, setPwdHelperText] = useState<string>('请输入账号') // 密码是否校验错误的文字提示
-	const [loading, setLoading] = useState<boolean>(false) // 登录按钮的进度提示
 	const [loadingIndicator, setLoadingIndicator] = useState<string>('网络链接失败!') // 登录按钮的登录状态文字提示
 	const [errorStatus, setErrorStatus] = useState<boolean>(false) // 登录异常的状态
 
@@ -235,10 +228,8 @@ export default function Login() {
 					>
 						<Typography>忘记密码?</Typography>
 						<LoginSubmit
-							loading={loading}
 							pwd={pwd}
 							setErrorStatus={setErrorStatus}
-							setLoading={setLoading}
 							setLoadingIndicator={setLoadingIndicator}
 							usr={usr}
 						/>
