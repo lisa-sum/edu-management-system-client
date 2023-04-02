@@ -21,7 +21,7 @@ job_web:
       # 从缓存获取
       #    - export PNPM_REGISTRY=local
       #    - PNPM_REGISTRY=local pnpm install --no-frozen-lockfile #不使用锁文件下载包
-    - pnpm install
+    - pnpm install --no-frozen-lockfile
     - pnpm eslint:fix
     - pnpm stylelint:fix
     - pnpm build:produ
