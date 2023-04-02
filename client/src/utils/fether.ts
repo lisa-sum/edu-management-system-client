@@ -11,7 +11,11 @@ export const fetcher = async (
 	if (METHODS.includes(method.toUpperCase())) {
 		return await fetch(uri, {
 			method,
-			headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` },
+			headers: {
+				'Authorization': `Bearer ${localStorage.getItem('token')}`,
+				'Origin': location.origin,
+				'Access-Control-Allow-Origin': location.origin,
+			},
 			body: JSON.stringify(body),
 		})
 			.then(async (res) => {

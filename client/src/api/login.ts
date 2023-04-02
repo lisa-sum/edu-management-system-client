@@ -13,7 +13,9 @@ export const getAuthLogin = (usr: string, pwd: string): Promise<UserBasicRespons
 	return (
 		fetch(import.meta.env.VITE_APP_USER, {
 			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
+			headers: {
+				'Content-Type': 'application/json',
+			},
 			body: JSON.stringify({
 				account: usr,
 				password: pwd,
