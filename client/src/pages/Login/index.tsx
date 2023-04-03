@@ -29,7 +29,6 @@ const LoginSubmit = ({
 		getAuthLogin(usr, pwd)
 			.then((res) => {
 				setLoadingIndicator(res.message)
-
 				const { role, username, account, avatar } = res.body.data
 				dispatch(updateUserInfo({ role, account, username, avatar }))
 				localStorage.setItem('token', res.body.token) // 设置token

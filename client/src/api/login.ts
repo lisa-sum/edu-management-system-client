@@ -15,6 +15,8 @@ export const getAuthLogin = (usr: string, pwd: string): Promise<UserBasicRespons
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
+				'Origin': location.origin,
+				'Access-Control-Allow-Origin': location.origin,
 			},
 			body: JSON.stringify({
 				account: usr,

@@ -29,7 +29,7 @@
 	},
 	"scripts": {
 		"dev:local": "vite --mode _local",
-		"dev:test": "vite --mode test --https",
+		"dev:test": "vite --mode test --https --port 443",
 		"dev:produ": "vite --mode release",
 		"build": "vite build",
 		"build:produ": "vite build --mode release",
