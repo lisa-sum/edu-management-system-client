@@ -49,6 +49,7 @@ job_deploy:
     - sh ./cmd/download.sh
     - echo "加载环境变量"
     - export SSHPASS="$PASSWORD"
+    - echo "$SSHPASS"
     - bash ./cmd/web_build.sh
     - bash ./cmd/cache.sh
     - echo "任务完成"
