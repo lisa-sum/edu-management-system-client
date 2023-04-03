@@ -16,7 +16,7 @@ sshpass -e scp -o stricthostkeychecking=no -r ./cmd/dir.sh dist.tgz root@47.120.
 sshpass -e scp -o stricthostkeychecking=no -r ./cmd/dir.sh dist.tgz root@192.168.0.158:/home/nginx/html/temp
 
 echo "进入主机47.120.5.83的/home/nginx/html/web目录下执行dir.sh目录script与解压dist.tgz前端压缩包,完成后删除前端压缩包"
-sshpass -e ssh -o stricthostkeychecking=no root@47.120.5.83 'cd /home/nginx/html/temp && bash dir.sh &&echo "查看目标服务器web目录"&& ls /home/nginx/html/web && tar -xzvf dist.tgz -C /home/nginx/html/web && rm -rf /home/nginx/html/temp'
+sshpass -e ssh -o stricthostkeychecking=no root@47.120.5.83 'cd /home/nginx/html/temp && bash dir.sh &&echo "查看目标服务器web目录"&& ls /home/nginx/html/web && tar -xzvf dist.tgz -C /home/nginx/html/web'
 sshpass -e ssh -o stricthostkeychecking=no root@192.168.0.158 'cd /home/nginx/html/temp && bash dir.sh && ls /home/nginx/html/web && tar -xzvf dist.tgz -C /home/nginx/html/web && rm -rf /home/nginx/html/temp'
 
 echo "删除本地无用dist.tgz文件"

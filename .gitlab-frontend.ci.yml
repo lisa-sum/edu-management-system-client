@@ -23,8 +23,8 @@ job_web:
       #    - export PNPM_REGISTRY=local
       #    - PNPM_REGISTRY=local pnpm install --no-frozen-lockfile #不使用锁文件下载包
     - pnpm install --no-frozen-lockfile
-    - pnpm eslint:fix
-    - pnpm stylelint:fix
+#    - pnpm eslint:fix
+#    - pnpm stylelint:fix
     - pnpm build:produ
     - ls
   only:
