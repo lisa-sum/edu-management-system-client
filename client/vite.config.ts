@@ -1,24 +1,12 @@
 import { resolve } from 'node:path'
 
-// import basicSSL from '@vitejs/plugin-basic-ssl'
+import basicSSL from '@vitejs/plugin-basic-ssl'
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
-// import viteCompression from 'vite-plugin-compression'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	plugins: [
-		react(),
-		//		basicSSL(),
-		// 压缩配置
-		//		viteCompression({
-		//			verbose: true,
-		//			disable: false,
-		//			threshold: 2048,
-		//			algorithm: 'gzip',
-		//			ext: '.tgz',
-		//		}),
-	],
+	plugins: [react(), basicSSL()],
 
 	// Vite options tailored for Tauri development and only applied in `tauri dev` or `tauri build`
 	// prevent vite from obscuring rust errors

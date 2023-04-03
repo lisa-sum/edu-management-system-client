@@ -1,11 +1,6 @@
 #!/bin/bash
 # 该脚本用于前端部署
 
-echo "打包前目录"
-ls
-ls ./client/
-ls ./client/dist
-
 echo "排除node_modules目录,将./web/client/dist前端文件打包为dist.tgz压缩包完成之后删除./web/client/dist所有文件"
 tar -czvf dist.tgz --exclude=node_modules -C ./client/dist . --remove-files
 
@@ -16,5 +11,5 @@ sshpass -e scp -o stricthostkeychecking=no -r ./cmd/dir.sh dist.tgz root@47.120.
 sshpass -e scp -o stricthostkeychecking=no -r ./cmd/dir.sh dist.tgz root@192.168.0.158:/home/nginx/html/temp
 
 echo "进入主机47.120.5.83的/home/nginx/html/web目录下执行dir.sh目录script与解压dist.tgz前端压缩包,完成后删除前端压缩包"
-sshpass -e ssh -o stricthostkeychecking=no root@47.120.5.83 'cd /home/nginx/html/temp && bash dir.sh &&echo "查看目标服务器web目录"&& ls /home/nginx/html/web && tar -xzvf dist.tgz -C /home/nginx/html/web'
-sshpass -e ssh -o stricthostkeychecking=no root@192.168.0.158 'cd /home/nginx/html/temp && bash dir.sh && ls /home/nginx/html/web && tar -xzvf dist.tgz -C /home/nginx/html/web && rm -rf /home/nginx/html/temp'
+sshpass -e ssh -o stricthostkeychecking=no root@47.120.5.83 'cd /home/nginx/html/temp && bash dir.sh && tar -xzvf dist.tgz -C /home/nginx/html/web && rm -rf /home/nginx/html/temp'
+sshpass -e ssh -o stricthostkeychecking=no root@192.168.0.158 'cd /home/nginx/html/temp && bash dir.sh && tar -xzvf dist.tgz -C /home/nginx/html/web && rm -rf /home/nginx/html/temp'

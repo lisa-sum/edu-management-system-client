@@ -19,21 +19,15 @@ job_web:
     - npm install pnpm -g
     - pnpm install
     - cd ./client
-      # 从缓存获取
-      #    - export PNPM_REGISTRY=local
-      #    - PNPM_REGISTRY=local pnpm install --no-frozen-lockfile #不使用锁文件下载包
     - pnpm install --no-frozen-lockfile
-#    - pnpm eslint:fix
-#    - pnpm stylelint:fix
     - pnpm build:produ
-    - ls
   only:
     - main
   # 提供打包好的文件
   artifacts:
     paths:
       - ./client/dist
-    expire_in: 1 week
+    expire_in: 3 day
 
 job_deploy:
   stage: deploy
@@ -49,9 +43,7 @@ job_deploy:
     - sh ./cmd/download.sh
     - echo "加载环境变量"
     - export SSHPASS="$PASSWORD"
-    - echo "$SSHPASS"
     - bash ./cmd/web_build.sh
     - bash ./cmd/cache.sh
     - echo "任务完成"
-    - ls
-    - pwd
+    - rm -rf *

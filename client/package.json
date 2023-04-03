@@ -30,7 +30,7 @@
 	"scripts": {
 		"dev:local": "vite --mode _local",
 		"dev:test": "vite --mode test --https --port 443",
-		"dev:produ": "vite --mode release",
+		"dev:produ": "vite --mode release --https --port 443",
 		"build": "vite build",
 		"build:produ": "vite build --mode release",
 		"preview": "vite preview",
@@ -46,14 +46,12 @@
 	"dependencies": {
 		"@reduxjs/toolkit": "^1.9.1",
 		"@tauri-apps/api": "^1.2.0",
-		"bcryptjs": "^2.4.3",
 		"crypto-js": "^4.1.1",
 		"echarts": "^5.4.1",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-redux": "^8.0.5",
-		"react-router-dom": "^6.4.4",
-		"vite-plugin-compression": "^0.5.1"
+		"react-router-dom": "^6.4.4"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.20.2",
@@ -63,8 +61,6 @@
 		"@mui/icons-material": "^5.10.14",
 		"@mui/lab": "5.0.0-alpha.110",
 		"@mui/material": "^5.10.14",
-		"@tanstack/react-query": "^4.19.1",
-		"@tanstack/react-query-devtools": "^4.19.1",
 		"@tauri-apps/cli": "^1.2.0",
 		"@types/crypto-js": "^4.1.1",
 		"@types/echarts": "^4.9.16",
