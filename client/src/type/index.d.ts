@@ -81,9 +81,9 @@ export type MessageBasic = {
 
 // 学院列表
 export type College = {
-	inputValue?: string
+	id?: string
 	name: string
-	info: string
+	description: string
 }
 
 // 专业列表
@@ -96,7 +96,7 @@ export type Specialty = {
 
 // 标准返回状态
 export type Status<T> = {
-	code?: number
+	code: number
 	message: string
 	body: T
 	state: AlertColor

@@ -1,25 +1,38 @@
 import Autocomplete from '@mui/material/Autocomplete'
 import CircularProgress from '@mui/material/CircularProgress'
 import TextField from '@mui/material/TextField'
-import { Dispatch, SetStateAction, SyntheticEvent, useEffect, useState } from 'react'
+import {
+	Dispatch,
+	SetStateAction,
+	SyntheticEvent,
+	useEffect,
+	useState,
+} from 'react'
 
-import { getCollegeList } from '@/api/college'
 import type { College } from '@/type'
+import { fetcher } from '@/utils/fether'
 
-export default function SelectCollege({ setCollegeType }: { setCollegeType?: Dispatch<SetStateAction<string>> }) {
+export default function SelectCollege({
+	setCollegeType,
+}: {
+	setCollegeType?: Dispatch<SetStateAction<string>>
+}) {
 	const [open, setOpen] = useState(false)
 	const [options, setOptions] = useState<readonly College[]>([])
 	const loading = open && options.length === 0
 
 	useEffect(() => {
-		getCollegeList()
-			.then((res: { body: College[] }) => {
-				setOptions([...res.body])
+		fetcher<College[]>(
+			import.meta.env.VITE_APP_COLLEGE,
+			'GET',
+		)('all')
+			.then((res) => {
+				console.log(res)
+				setOptions(res.body)
 			})
 			.catch((err) => {
 				console.error(err)
 			})
-
 		if (!loading) {
 			return undefined
 		}
@@ -36,7 +49,7 @@ export default function SelectCollege({ setCollegeType }: { setCollegeType?: Dis
 			<Autocomplete
 				getOptionLabel={(option) => option.name}
 				id="asynchronous"
-				isOptionEqualToValue={(option, value) => option.info === value.info}
+				isOptionEqualToValue={(option, value) => option.name === value.name}
 				loading={loading}
 				open={open}
 				options={options}
@@ -61,7 +74,10 @@ export default function SelectCollege({ setCollegeType }: { setCollegeType?: Dis
 					/>
 				)}
 				sx={{ width: 300 }}
-				onChange={(_event: SyntheticEvent<Element, Event>, newValue: College | null) => {
+				onChange={(
+					_event: SyntheticEvent<Element, Event>,
+					newValue: College | null,
+				) => {
 					setCollegeType(newValue?.name || '')
 				}}
 				onClose={() => {
@@ -78,7 +94,9 @@ export default function SelectCollege({ setCollegeType }: { setCollegeType?: Dis
 		<Autocomplete
 			getOptionLabel={(option) => option.name}
 			id="asynchronous"
-			isOptionEqualToValue={(option, value) => option.info === value.info}
+			isOptionEqualToValue={(option, value) =>
+				option.description === value.description
+			}
 			loading={loading}
 			open={open}
 			options={options}

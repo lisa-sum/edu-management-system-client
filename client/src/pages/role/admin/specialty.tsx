@@ -1,11 +1,19 @@
-import { alpha, Box, Button, FormControl, InputBase, InputLabel, styled } from '@mui/material'
+import {
+	alpha,
+	Box,
+	Button,
+	FormControl,
+	InputBase,
+	InputLabel,
+	styled,
+} from '@mui/material'
 import Autocomplete from '@mui/material/Autocomplete'
 import TextField from '@mui/material/TextField'
 import Grid2 from '@mui/material/Unstable_Grid2'
 import { ChangeEvent, useEffect, useState } from 'react'
 
 import { updateSpecialtyOne } from '@/api/specialty'
-import type { Specialty as SpecialtyType, Status } from '@/type'
+import type { Specialty as SpecialtyType } from '@/type'
 import { fetcher } from '@/utils/fether'
 
 const GridBox = styled(Grid2)(({ theme }) => ({
@@ -41,7 +49,11 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
 			fontSize: 24,
 		},
 		padding: '10px 12px',
-		transition: theme.transitions.create(['border-color', 'background-color', 'box-shadow']),
+		transition: theme.transitions.create([
+			'border-color',
+			'background-color',
+			'box-shadow',
+		]),
 		// Use the system font instead of the default Roboto font.
 		fontFamily: [
 			'-apple-system',
@@ -69,12 +81,18 @@ export default function Specialty() {
 	const [specialtyList, setSpecialtyList] = useState<SpecialtyType[]>([])
 
 	useEffect(() => {
-		fetcher(`${import.meta.env.VITE_APP_SPECIALTY}?query=all`).then((res: Status<SpecialtyType[]>) => {
-			return setSpecialtyList(res.body)
-		})
+		fetcher<SpecialtyType[]>(import.meta.env.VITE_APP_SPECIALTY)('all').then(
+			(res) => {
+				return setSpecialtyList(res.body)
+			},
+		)
 	}, [])
 
-	const updateSpecialtyData = async (oldName: string, name: string, info: string) => {
+	const updateSpecialtyData = async (
+		oldName: string,
+		name: string,
+		info: string,
+	) => {
 		await updateSpecialtyOne(oldName, name, info)
 			.then((res) => {
 				console.log(res.body)
@@ -108,7 +126,9 @@ export default function Specialty() {
 						sx={{
 							width: '400px',
 						}}
-						onChange={(_, value: SpecialtyType | null) => setOldName(value?.name || '')}
+						onChange={(_, value: SpecialtyType | null) =>
+							setOldName(value?.name || '')
+						}
 					/>
 				</Grid2>
 
@@ -126,7 +146,9 @@ export default function Specialty() {
 						<BootstrapInput
 							id="input"
 							placeholder="输入新的专业名称"
-							onChange={(event: ChangeEvent<HTMLInputElement>) => setName(event.target.value)}
+							onChange={(event: ChangeEvent<HTMLInputElement>) =>
+								setName(event.target.value)
+							}
 						/>
 					</FormControl>
 				</Grid2>
@@ -144,7 +166,9 @@ export default function Specialty() {
 						<BootstrapInput
 							id="input"
 							placeholder="输入专业介绍"
-							onChange={(event: ChangeEvent<HTMLInputElement>) => setInfo(event.target.value)}
+							onChange={(event: ChangeEvent<HTMLInputElement>) =>
+								setInfo(event.target.value)
+							}
 						/>
 					</FormControl>
 				</Grid2>

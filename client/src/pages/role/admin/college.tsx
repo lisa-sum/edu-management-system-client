@@ -1,4 +1,14 @@
-import { Alert, alpha, Box, Button, FormControl, InputBase, InputLabel, styled, Typography } from '@mui/material'
+import {
+	Alert,
+	alpha,
+	Box,
+	Button,
+	FormControl,
+	InputBase,
+	InputLabel,
+	styled,
+	Typography,
+} from '@mui/material'
 import Grid2 from '@mui/material/Unstable_Grid2'
 import { ChangeEvent, useState } from 'react'
 
@@ -39,7 +49,11 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
 			fontSize: 24,
 		},
 		padding: '10px 12px',
-		transition: theme.transitions.create(['border-color', 'background-color', 'box-shadow']),
+		transition: theme.transitions.create([
+			'border-color',
+			'background-color',
+			'box-shadow',
+		]),
 		// Use the system font instead of the default Roboto font.
 		fontFamily: [
 			'-apple-system',
@@ -60,7 +74,11 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
 	},
 }))
 
-const updateCollegeData = async (collegeType: string, collegeName: string, collegeInfo: string) => {
+const updateCollegeData = async (
+	collegeType: string,
+	collegeName: string,
+	collegeInfo: string,
+) => {
 	await updateCollege(collegeType, collegeName, collegeInfo)
 		.then((res) => {
 			console.log(res)
@@ -85,6 +103,7 @@ export default function College() {
 		if (collegeName === '' || collegeInfo === '') {
 			setShow(true)
 			setStatus({
+				code: 201,
 				body: '',
 				state: 'error',
 				message: '数据不能为空, 请输入数据!',
@@ -119,6 +138,7 @@ export default function College() {
 				if (res.body.DeletedCount === 0) {
 					console.log(1)
 					setStatus({
+						code: 201,
 						body: '',
 						message: '该数据已经删除, 请刷新页面',
 						state: 'info',
@@ -176,7 +196,9 @@ export default function College() {
 						<BootstrapInput
 							id="input"
 							placeholder="输入新学院名称"
-							onChange={(event: ChangeEvent<HTMLInputElement>) => setCollegeName(event.target.value)}
+							onChange={(event: ChangeEvent<HTMLInputElement>) =>
+								setCollegeName(event.target.value)
+							}
 						/>
 					</FormControl>
 				</Grid2>
@@ -194,7 +216,9 @@ export default function College() {
 						<BootstrapInput
 							id="input"
 							placeholder="输入新学院介绍"
-							onChange={(event: ChangeEvent<HTMLInputElement>) => setCollegeInfo(event.target.value)}
+							onChange={(event: ChangeEvent<HTMLInputElement>) =>
+								setCollegeInfo(event.target.value)
+							}
 						/>
 					</FormControl>
 
@@ -209,7 +233,9 @@ export default function College() {
 								fontSize: 18,
 							}}
 							variant="contained"
-							onClick={() => updateCollegeData(collegeType, collegeName, collegeInfo)}
+							onClick={() =>
+								updateCollegeData(collegeType, collegeName, collegeInfo)
+							}
 						>
 							更新
 						</Button>

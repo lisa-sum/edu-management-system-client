@@ -16,7 +16,7 @@ module.exports = {
 	// 是否在文件顶部插入@format标记
 	'insertPragma': false,
 	// 指定超过该最大长度时，prettier换行。
-	'printWidth': 140,
+	'printWidth': 80,
 	// 属性换行方式
 	'proseWrap': 'preserve',
 	// 对象中的属性名如何添加引号

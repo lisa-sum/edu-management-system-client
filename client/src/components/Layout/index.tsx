@@ -30,7 +30,11 @@ import { useAppDispatch, useAppSelector } from '@/utils/hooks'
 const teacherRoutes: RouteList[] = [
 	{ element: <Profile />, path: '/profile', label: '个人' },
 	{ element: <Schedule />, path: '/schedule', label: '课程表' },
-	{ element: <ApplyForClassRoom />, path: '/applyForClassRoom', label: '教室申请' },
+	{
+		element: <ApplyForClassRoom />,
+		path: '/applyForClassRoom',
+		label: '教室申请',
+	},
 	{ element: <Mark />, path: '/mark', label: '开设课程' },
 	{ element: <Chat />, path: '/ws/chat', label: '即时聊天' },
 	{ element: <Login />, path: '/login', label: '登录' },
@@ -85,7 +89,9 @@ const Role = ({
 	)
 }
 export default function Layout() {
-	const { role, username } = useAppSelector((state: RootState) => state.profile.value) // 权限验证
+	const { role, username } = useAppSelector(
+		(state: RootState) => state.profile.value,
+	) // 权限验证
 	const navigate = useNavigate()
 	const dispatch = useAppDispatch()
 	const [show, setShow] = useState<boolean>(false) // 关闭按钮
@@ -146,26 +152,56 @@ export default function Layout() {
 					<Box
 						sx={{
 							position: 'fixed',
-							width: '50vw',
-							textAlign: 'center',
+							width: '100vw',
+							height: '52px',
 							mx: 'auto',
+							lineHeight: '52px',
+							color: '#646a73',
 							bottom: 0,
 							columnCount: 3,
+							bgcolor: '#f8f9fa',
+							display: 'flex',
+							justifyContent: 'center',
+							gap: '20px',
 						}}
 					>
-						<Box
-							component="img"
-							src={beianIco}
-						/>
-						<Link
-							href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=45062102000015"
-							target="_blank"
+						<Typography
+							sx={{
+								display: 'inline-block',
+								color: '#646a73',
+								lineHeight: '52px',
+							}}
 						>
-							桂公网安备45062102000015号
-						</Link>
-						<Typography>桂ICP备2022004535号</Typography>
+							桂ICP备2022004535号
+						</Typography>
+						<Box>
+							<Box
+								alt="备案图标"
+								component="img"
+								src={beianIco}
+								sx={{
+									width: 'auto',
+									height: 'auto',
+								}}
+							/>
+							<Link
+								href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=45062102000015"
+								sx={{
+									display: 'inline-block',
+									color: '#646a73',
+								}}
+								target="_blank"
+							>
+								桂公网安备45062102000015号
+							</Link>
+						</Box>
+
 						<Link
 							href="https://beian.miit.gov.cn/"
+							sx={{
+								display: 'inline-block',
+								color: '#646a73',
+							}}
 							target="_blank"
 						>
 							桂ICP备2022004535号-2

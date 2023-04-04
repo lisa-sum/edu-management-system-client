@@ -10,7 +10,7 @@ export default function SelectClass({ specialty }: { specialty: string }) {
 
 	console.log(options)
 	useEffect(() => {
-		fetcher(import.meta.env.VITE_APP_CLASS, 'GET', specialty)
+		fetcher<ClassList[]>(import.meta.env.VITE_APP_CLASS)(specialty)
 			.then((res) => {
 				console.log(res)
 				// console.log(res.json())
