@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.4](https://gitee.com/yunyn/edu-management-system/compare/v0.2.3...v0.2.4) (2023-04-13)
+
+
+### ✅ Tests | 测试
+
+* 测试standard-version 提交 ([ec9d764](https://gitee.com/yunyn/edu-management-system/commit/ec9d7649d34a6a24b1bfe0de27d185a7bbb1f55d))
+
 ### [0.2.3](https://gitee.com/yunyn/edu-management-system/compare/v0.2.2...v0.2.3) (2023-04-13)
 
 
