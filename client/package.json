@@ -1,9 +1,9 @@
 {
-	"name": "edu-management-system",
+	"name": "edu-management-system-client",
 	"private": true,
-	"version": "0.1.0",
+	"version": "0.2.1",
 	"type": "commonjs",
-	"description": "EDU management system",
+	"description": "EDU management system client",
 	"author": {
 		"name": "Rococo",
 		"email": "xicons@qq.com",
