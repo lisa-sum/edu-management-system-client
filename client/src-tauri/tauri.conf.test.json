@@ -1,9 +1,9 @@
 {
 	"build": {
-		"beforeDevCommand": "pnpm dev:prod",
+		"beforeDevCommand": "pnpm dev:test",
 		"beforeBuildCommand": "pnpm build:prod",
-		"devPath": "https://www.52idc.top",
-		"distDir": "../dist"
+		"devPath": "https://localhost",
+		"distDir": "../dist-test"
 	},
 	"package": {
 		"productName": "client",

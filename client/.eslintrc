@@ -48,6 +48,13 @@
 		}
 	},
 	"rules": {
+		// 链式调用的方法在下一行
+		"newline-per-chained-call": [
+			"error",
+			{
+				"ignoreChainWithDepth": 2
+			}
+		],
 		// 文件末尾插入换行符号\n, 这样才符合LF标准，CRLF标准需要去除
 		"eol-last": [
 			"error",

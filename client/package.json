@@ -28,11 +28,13 @@
 		"url": "https://github.com/lookeke/edu-management-system/issues"
 	},
 	"scripts": {
-		"dev:local": "vite --mode _local",
+		"dev": "vite --mode development",
 		"dev:test": "vite --mode test --https --port 443",
-		"dev:produ": "vite --mode release --https --port 443",
+		"dev:prod": "vite --mode production --https --port 443",
+		"test": "vitest",
+		"coverage": "vitest run --coverage",
 		"build": "vite build",
-		"build:produ": "vite build --mode release",
+		"build:prod": "vite build --mode production",
 		"preview": "vite preview",
 		"tauri": "tauri",
 		"eslint": "eslint src/**/**.ts src/**/**.tsx",
@@ -44,24 +46,26 @@
 		"*.{js,jsx,ts,tsx}": "prettier --write"
 	},
 	"dependencies": {
-		"@reduxjs/toolkit": "^1.9.1",
 		"@tauri-apps/api": "^1.2.0",
-		"crypto-js": "^4.1.1",
 		"echarts": "^5.4.1",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
-		"react-redux": "^8.0.5",
 		"react-router-dom": "^6.4.4"
 	},
 	"devDependencies": {
-		"@babel/core": "^7.20.2",
+		"@babel/core": "^7.21.4",
 		"@babel/eslint-parser": "^7.19.1",
 		"@emotion/react": "^11.10.5",
 		"@emotion/styled": "^11.10.5",
 		"@mui/icons-material": "^5.10.14",
 		"@mui/lab": "5.0.0-alpha.110",
 		"@mui/material": "^5.10.14",
+		"@playwright/test": "^1.32.3",
+		"@reduxjs/toolkit": "^1.9.3",
+		"@tanstack/react-query": "^4.29.1",
+		"@tanstack/react-query-devtools": "^4.29.1",
 		"@tauri-apps/cli": "^1.2.0",
+		"@testing-library/react": "^14.0.0",
 		"@types/crypto-js": "^4.1.1",
 		"@types/echarts": "^4.9.16",
 		"@types/node": "^18.11.9",
@@ -70,7 +74,8 @@
 		"@typescript-eslint/eslint-plugin": "^5.44.0",
 		"@typescript-eslint/parser": "^5.44.0",
 		"@vitejs/plugin-basic-ssl": "^1.0.1",
-		"@vitejs/plugin-react": "^2.2.0",
+		"@vitejs/plugin-react-swc": "^3.3.0",
+		"crypto-js": "^4.1.1",
 		"eslint": "^8.28.0",
 		"eslint-config-alloy": "^4.7.0",
 		"eslint-import-resolver-typescript": "^3.5.2",
@@ -82,6 +87,8 @@
 		"eslint-plugin-typescript-enum": "^2.1.0",
 		"postcss": "^8.4.19",
 		"prettier": "^2.7.1",
+		"react-redux": "^8.0.5",
+		"react-test-renderer": "^18.2.0",
 		"sass": "^1.56.1",
 		"standard-version": "^9.5.0",
 		"stylelint": "^14.15.0",
@@ -91,6 +98,7 @@
 		"stylelint-config-standard-scss": "^6.1.0",
 		"swiper": "^8.4.5",
 		"typescript": "^4.9.3",
-		"vite": "^3.2.4"
+		"vite": "^4.2.1",
+		"vitest": "^0.30.1"
 	}
 }

@@ -1,10 +1,14 @@
 {
 	"scripts": {
+		// husky 安装
 		"prepare": "husky install",
+		// 推送时不需要调用 git hooks, 在husky commit 时就检查的库就需要跳过,以免被再次检查,默认升级patch
 		"release": "standard-version -- --no-verify",
+		// 大版本更新
 		"release:major": "standard-version --release-as major -- --no-verify",
+		// 小版本更新
 		"release:minor": "standard-version --release-as minor -- --no-verify",
-		"publish": "git push --follow-tags main"
+		"publish": "git push --follow-tags --all main"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^17.3.0",
@@ -13,5 +17,5 @@
 		"lint-staged": "^13.1.0",
 		"standard-version": "^9.5.0"
 	},
-	"version": "0.2.1"
+	"version": "0.2.0"
 }

@@ -1,337 +1,326 @@
 import {
-	Alert,
-	alpha,
-	Box,
-	Button,
-	FormControl,
-	InputBase,
-	InputLabel,
-	styled,
-	Typography,
+  alpha,
+  Box,
+  Button,
+  FormControl,
+  InputBase,
+  InputLabel,
+  styled,
+  Theme,
+  Typography,
 } from '@mui/material'
 import Grid2 from '@mui/material/Unstable_Grid2'
-import { ChangeEvent, useState } from 'react'
+import {useMutation} from '@tanstack/react-query'
+import {ChangeEvent, useEffect, useState} from 'react'
 
-import { addCollege, deleteCollege, updateCollege } from '@/api/college'
 import SelectCollege from '@/components/selectCollege'
-import type { Status } from '@/type'
+import {RootState} from '@/store'
+import {BootstrapInputProps} from '@/type'
+import {fetcher} from '@/utils/fether'
+import {useAppSelector} from '@/utils/hooks'
 
-const GridBox = styled(Grid2)(({ theme }) => ({
-	[theme.breakpoints.down('md')]: {
-		display: 'flex',
-		justifyContent: 'space-between',
-		flexDirection: 'column',
-	},
+// 布局组件
+const GridBox = styled(Grid2)(({theme}) => ({
+  [theme.breakpoints.down('md')]: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexDirection: 'column',
+  },
 }))
 
-const BootstrapInput = styled(InputBase)(({ theme }) => ({
-	'label + &': {
-		marginTop: theme.spacing(3),
-	},
-	'& .MuiInputBase-input': {
-		borderRadius: 4,
-		position: 'relative',
-		backgroundColor: theme.palette.mode === 'light' ? '#fcfcfb' : '#2b2b2b',
-		border: '1px solid #ced4da',
-		width: '275px',
-		fontSize: 18,
-		[theme.breakpoints.down('lg')]: {
-			width: '374px',
-			fontSize: 18,
-		},
-		[theme.breakpoints.up('lg')]: {
-			width: 'auto',
-			minWidth: '300px',
-			fontSize: 17,
-		},
-		[theme.breakpoints.up('xl')]: {
-			width: '550px',
-			fontSize: 24,
-		},
-		padding: '10px 12px',
-		transition: theme.transitions.create([
-			'border-color',
-			'background-color',
-			'box-shadow',
-		]),
-		// Use the system font instead of the default Roboto font.
-		fontFamily: [
-			'-apple-system',
-			'BlinkMacSystemFont',
-			'"Segoe UI"',
-			'Roboto',
-			'"Helvetica Neue"',
-			'Arial',
-			'sans-serif',
-			'"Apple Color Emoji"',
-			'"Segoe UI Emoji"',
-			'"Segoe UI Symbol"',
-		].join(','),
-		'&:focus': {
-			boxShadow: `${alpha(theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
-			borderColor: theme.palette.primary.main,
-		},
-	},
-}))
-
-const updateCollegeData = async (
-	collegeType: string,
-	collegeName: string,
-	collegeInfo: string,
-) => {
-	await updateCollege(collegeType, collegeName, collegeInfo)
-		.then((res) => {
-			console.log(res)
-		})
-		.catch((err) => {
-			console.error(err)
-		})
-}
+// 输入框组件
+const BootstrapInput = styled(InputBase)<BootstrapInputProps>(
+  ({theme, mode}: {theme: Theme; mode: string}) => ({
+    'label + &': {
+      marginTop: theme.spacing(3),
+    },
+    '& .MuiInputBase-input': {
+      borderRadius: 4,
+      position: 'relative',
+      backgroundColor: theme.palette.mode === mode ? '#fcfcfb' : '#2b2b2b',
+      border: '1px solid #ced4da',
+      width: '275px',
+      fontSize: 18,
+      [theme.breakpoints.down('lg')]: {
+        width: '374px',
+        fontSize: 18,
+      },
+      [theme.breakpoints.up('lg')]: {
+        width: 'auto',
+        minWidth: '300px',
+        fontSize: 17,
+      },
+      [theme.breakpoints.up('xl')]: {
+        width: '550px',
+        fontSize: 24,
+      },
+      padding: '10px 12px',
+      transition: theme.transitions.create([
+        'border-color',
+        'background-color',
+        'box-shadow',
+      ]),
+      // Use the system font instead of the default Roboto font.
+      fontFamily: [
+        '-apple-system',
+        'BlinkMacSystemFont',
+        '"Segoe UI"',
+        'Roboto',
+        '"Helvetica Neue"',
+        'Arial',
+        'sans-serif',
+        '"Apple Color Emoji"',
+        '"Segoe UI Emoji"',
+        '"Segoe UI Symbol"',
+      ].join(','),
+      '&:focus': {
+        boxShadow: `${alpha(theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
+        borderColor: theme.palette.primary.main,
+      },
+    },
+  }),
+)
 
 export default function College() {
-	const [collegeType, setCollegeType] = useState<string>('')
-	const [collegeInfo, setCollegeInfo] = useState<string>('')
-	const [collegeName, setCollegeName] = useState<string>('')
-	const [show, setShow] = useState<boolean>(false)
-	const [status, setStatus] = useState<Status<any>>({
-		code: 200,
-		message: '',
-		body: '',
-		state: 'success',
-	})
-	const addCollegeData = async (collegeName: string, collegeInfo: string) => {
-		if (collegeName === '' || collegeInfo === '') {
-			setShow(true)
-			setStatus({
-				code: 201,
-				body: '',
-				state: 'error',
-				message: '数据不能为空, 请输入数据!',
-			})
-			return
-		}
-		await addCollege(collegeName, collegeInfo)
-			.then((res) => {
-				console.log(res)
-				setShow(true)
-				if (res.code === 409) {
-					setStatus({
-						state: 'info',
-						...res,
-					})
-				}
-				setStatus(res)
-			})
-			.catch((err) => {
-				setStatus({
-					state: 'error',
-					...err,
-				})
-				console.error(err)
-			})
-	}
+  const {mode} = useAppSelector((state: RootState) => state.theme.value)
+  const [oldCollegeName, setOldCollegeName] = useState<string>('')
+  const [collegeDescription, setCollegeInfo] = useState<string>('')
+  const [newCollegeName, setNewCollegeName] = useState<string>('')
 
-	const deleteCollegeData = async (collegeType: string) => {
-		await deleteCollege(collegeType)
-			.then((res) => {
-				console.log(res)
-				if (res.body.DeletedCount === 0) {
-					console.log(1)
-					setStatus({
-						code: 201,
-						body: '',
-						message: '该数据已经删除, 请刷新页面',
-						state: 'info',
-					})
-					return
-				}
-				setShow(true)
-				setStatus(res)
-			})
-			.catch((err) => {
-				setStatus({
-					state: 'error',
-					...err,
-				})
-				console.error(err)
-			})
-	}
-	return (
-		<Box>
-			{show && (
-				<Alert
-					severity={status.state}
-					onClose={() => setShow(false)}
-				>
-					{status.message}
-				</Alert>
-			)}
-			<GridBox
-				container
-				spacing={3}
-			>
-				<Grid2
-					lg={6}
-					md={12}
-				>
-					<Typography>更新学院</Typography>
-				</Grid2>
-				<Grid2
-					lg={6}
-					md={12}
-				>
-					<SelectCollege setCollegeType={setCollegeType} />
-				</Grid2>
-				<Grid2
-					lg={6}
-					md={12}
-				>
-					<FormControl variant="standard">
-						<InputLabel
-							shrink
-							htmlFor="input"
-						>
-							学院名称
-						</InputLabel>
-						<BootstrapInput
-							id="input"
-							placeholder="输入新学院名称"
-							onChange={(event: ChangeEvent<HTMLInputElement>) =>
-								setCollegeName(event.target.value)
-							}
-						/>
-					</FormControl>
-				</Grid2>
-				<Grid2
-					lg={6}
-					md={12}
-				>
-					<FormControl variant="standard">
-						<InputLabel
-							shrink
-							htmlFor="input"
-						>
-							学院介绍
-						</InputLabel>
-						<BootstrapInput
-							id="input"
-							placeholder="输入新学院介绍"
-							onChange={(event: ChangeEvent<HTMLInputElement>) =>
-								setCollegeInfo(event.target.value)
-							}
-						/>
-					</FormControl>
+  const addCollegeInfo = useMutation({
+    mutationFn: ({
+      collegeDescription,
+      newCollegeName,
+    }: {
+      collegeDescription: string
+      newCollegeName: string
+    }) => {
+      return fetcher(
+        import.meta.env.VITE_APP_COLLEGE,
+        'PUT',
+      )({
+        newName: collegeDescription,
+        description: newCollegeName,
+      }).then((res) => {
+        console.log(res)
+      })
+    },
+  })
 
-					<Grid2
-						lg={6}
-						md={12}
-					>
-						<Button
-							sx={{
-								width: '325px',
-								height: '46px',
-								fontSize: 18,
-							}}
-							variant="contained"
-							onClick={() =>
-								updateCollegeData(collegeType, collegeName, collegeInfo)
-							}
-						>
-							更新
-						</Button>
-					</Grid2>
-				</Grid2>
+  const updateCollegeData = useMutation({
+    mutationFn: ({
+      oldCollegeName,
+      newCollegeName,
+      collegeDescription,
+    }: {
+      oldCollegeName: string
+      newCollegeName: string
+      collegeDescription: string
+    }) => {
+      return fetcher(
+        import.meta.env.VITE_APP_COLLEGE,
+        'POST',
+      )({
+        oldName: oldCollegeName,
+        newName: newCollegeName,
+        description: collegeDescription,
+      })
+        .then((res) => {
+          console.log(res)
+          return res.body
+        })
+        .catch((error) => {
+          console.error(error)
+        })
+    },
+  })
 
-				<Grid2
-					lg={6}
-					md={12}
-				>
-					<Typography>添加学院</Typography>
-				</Grid2>
+  useEffect(() => {
+    console.log(addCollegeInfo)
+  }, [addCollegeInfo])
 
-				<Grid2
-					lg={6}
-					md={12}
-				>
-					<FormControl variant="standard">
-						<InputLabel
-							shrink
-							htmlFor="input"
-						>
-							学院名称
-						</InputLabel>
-						<BootstrapInput
-							id="input"
-							placeholder="输入新学院名称"
-						/>
-					</FormControl>
-				</Grid2>
-				<Grid2
-					lg={6}
-					md={12}
-				>
-					<FormControl variant="standard">
-						<InputLabel
-							shrink
-							htmlFor="input"
-						>
-							学院介绍
-						</InputLabel>
-						<BootstrapInput
-							id="input"
-							placeholder="输入新学院介绍"
-						/>
-					</FormControl>
-				</Grid2>
+  return (
+    <Box>
+      <GridBox
+        container
+        spacing={3}
+      >
+        <Grid2
+          lg={6}
+          md={12}
+        >
+          <Typography>更新学院</Typography>
+        </Grid2>
+        <Grid2
+          lg={6}
+          md={12}
+        >
+          <SelectCollege setCollegeName={setOldCollegeName} />
+        </Grid2>
+        <Grid2
+          lg={6}
+          md={12}
+        >
+          <FormControl variant="standard">
+            <InputLabel
+              shrink
+              htmlFor="input"
+            >
+              学院名称
+            </InputLabel>
+            <BootstrapInput
+              id="input"
+              mode={mode}
+              placeholder="输入新学院名称"
+              // value={}
+              onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                setNewCollegeName(event.target.value)
+              }
+            />
+          </FormControl>
+        </Grid2>
+        <Grid2
+          lg={6}
+          md={12}
+        >
+          <FormControl variant="standard">
+            <InputLabel
+              shrink
+              htmlFor="input"
+            >
+              学院介绍
+            </InputLabel>
+            <BootstrapInput
+              id="input"
+              mode={mode}
+              placeholder="输入新学院介绍"
+              onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                setCollegeInfo(event.target.value)
+              }
+            />
+          </FormControl>
 
-				<Grid2
-					lg={6}
-					md={12}
-				>
-					<Button
-						sx={{
-							width: '325px',
-							height: '46px',
-							fontSize: 18,
-						}}
-						variant="contained"
-						onClick={() => addCollegeData(collegeInfo, collegeName)}
-					>
-						添加
-					</Button>
-				</Grid2>
+          <Grid2
+            lg={6}
+            md={12}
+          >
+            <Button
+              sx={{
+                width: '325px',
+                height: '46px',
+                fontSize: 18,
+              }}
+              variant="contained"
+              onClick={() =>
+                updateCollegeData.mutate({
+                  oldCollegeName,
+                  newCollegeName,
+                  collegeDescription,
+                })
+              }
+            >
+              更新
+            </Button>
+          </Grid2>
+        </Grid2>
 
-				<Grid2
-					lg={6}
-					md={12}
-				>
-					<Typography>添加学院</Typography>
-				</Grid2>
+        <Grid2
+          lg={6}
+          md={12}
+        >
+          <Typography>添加学院</Typography>
+        </Grid2>
 
-				<Grid2
-					lg={6}
-					md={12}
-				>
-					<SelectCollege setCollegeType={setCollegeType} />
-				</Grid2>
+        <Grid2
+          lg={6}
+          md={12}
+        >
+          <FormControl variant="standard">
+            <InputLabel
+              shrink
+              htmlFor="input"
+            >
+              学院名称
+            </InputLabel>
+            <BootstrapInput
+              id="input"
+              mode={mode}
+              placeholder="输入新学院名称"
+            />
+          </FormControl>
+        </Grid2>
+        <Grid2
+          lg={6}
+          md={12}
+        >
+          <FormControl variant="standard">
+            <InputLabel
+              shrink
+              htmlFor="input"
+            >
+              学院介绍
+            </InputLabel>
+            <BootstrapInput
+              id="input"
+              mode={mode}
+              placeholder="输入新学院介绍"
+            />
+          </FormControl>
+        </Grid2>
 
-				<Grid2
-					lg={6}
-					md={12}
-				>
-					<Button
-						sx={{
-							width: '325px',
-							height: '46px',
-							fontSize: 18,
-						}}
-						variant="contained"
-						onClick={() => deleteCollegeData(collegeType)}
-					>
-						删除
-					</Button>
-				</Grid2>
-			</GridBox>
-		</Box>
-	)
+        <Grid2
+          lg={6}
+          md={12}
+        >
+          <Button
+            sx={{
+              width: '325px',
+              height: '46px',
+              fontSize: 18,
+            }}
+            variant="contained"
+            onClick={() =>
+              addCollegeInfo.mutate({
+                collegeDescription,
+                newCollegeName,
+              })
+            }
+          >
+            添加
+          </Button>
+        </Grid2>
+
+        <Grid2
+          lg={6}
+          md={12}
+        >
+          <Typography>添加学院</Typography>
+        </Grid2>
+
+        <Grid2
+          lg={6}
+          md={12}
+        >
+          <SelectCollege setCollegeName={setOldCollegeName} />
+        </Grid2>
+
+        <Grid2
+          lg={6}
+          md={12}
+        >
+          <Button
+            sx={{
+              width: '325px',
+              height: '46px',
+              fontSize: 18,
+            }}
+            variant="contained"
+            // onClick={() => deleteCollegeData(oldCollegeName)}
+          >
+            删除
+          </Button>
+        </Grid2>
+      </GridBox>
+    </Box>
+  )
 }

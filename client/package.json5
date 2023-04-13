@@ -1,123 +1,131 @@
 {
-	"name": "edu-management-system",
-	// 系统名称
-	"private": true,
-	// 是否属于个人私有
-	"version": "0.1.0",
-	// 系统版本
-	"type": "commonjs",
-	// 模块类型
-	"description": "EDU management system",
-	// 系统描述
-	/* 作者描述 */
-	"author": {
-		"name": "Rococo",
-		// 姓名
-		"email": "xicons@qq.com",
-		// 邮箱
-		"url": "https://github.com/lookeke"
-		// github账号
-	},
-	/* 包管理器最低要求 */
-	"engines": {
-		"node": ">=14",
-		"npm": ">=8",
-		"yarn": ">=1",
-		"pnpm": ">=6"
-	},
-	/* 系统关键字 */
-	"keywords": [
-		"vpn"
-	],
-	/*  系统入口文件 */
-	"main": "./src/main.tsx",
-	/* 系统源码地址 */
-	"homepage": "https://github.com/lookeke/edu-management-system",
-	/* 仓库地址 */
-	"repository": {
-		"type": "git",
-		// 仓库类型
-		"url": "https://github.com/lookeke/edu-management-system.git"
-		// 仓库具体位置
-	},
-	/* 提交BUG */
-	"bugs": {
-		"url": "https://github.com/lookeke/edu-management-system/issues"
-	},
-	/* 脚本命令 */
-	"scripts": {
-		"dev:local": "vite -mode _local",
-		// 本地开发, 使用localhost
-		"build": "vite build",
-		// 前端文件打包
-		"preview": "vite preview",
-		// 系统预览
-		"tauri:dev": "tauri dev",
-		// PC端本地开发
-		"tauri:build": "tauri build",
-		// 前端文件打包成PC端桌面程序
-		"eslint": "eslint src/**/**.ts src/**/**.tsx",
-		// ESLint 规则检查
-		"eslint:fix": "eslint --cache src --ext ts,tsx --fix",
-		// ESLint 规则修复
-		"stylelint": "stylelint src/**/**.{css,scss,sass}",
-		// StyleLint 规则检查
-		"stylelint:fix": "stylelint src/**/**.{css,scss,sass} --fix",
-		// StyleLint 规则修复
-		"release": "standard-version -- --no-verify",
-		// 常规版本发行 不进行检测(husky代替检测)
-		"release:major": "standard-version --release-as major -- --no-verify",
-		// 大版本发行
-		"release:minor": "standard-version --release-as minor -- --no-verify",
-		// 小版本发行
-		"publish": "git push --tags-follow"
-		// 推送到远程并创建tag
-	},
-	/* 规则配置 */
-	"lint-staged": {
-		"*.{js,jsx,ts,tsx}": "prettier --write"
-	},
-	/* 运行时环境依赖 */
-	"dependencies": {
-		"@tauri-apps/api": "^1.2.0",
-		"react": "^18.2.0",
-		"react-dom": "^18.2.0"
-	},
-	/* 开发环境依赖 */
-	"devDependencies": {
-		"@babel/core": "^7.20.2",
-		"@babel/eslint-parser": "^7.19.1",
-		"@emotion/react": "^11.10.5",
-		"@emotion/styled": "^11.10.5",
-		"@mui/icons-material": "^5.10.14",
-		"@mui/material": "^5.10.14",
-		"@tauri-apps/cli": "^1.2.0",
-		"@types/node": "^18.11.9",
-		"@types/react": "^18.0.25",
-		"@types/react-dom": "^18.0.9",
-		"@typescript-eslint/eslint-plugin": "^5.44.0",
-		"@typescript-eslint/parser": "^5.44.0",
-		"@vitejs/plugin-react": "^2.2.0",
-		"eslint": "^8.28.0",
-		"eslint-config-alloy": "^4.7.0",
-		"eslint-import-resolver-typescript": "^3.5.2",
-		"eslint-plugin-import": "^2.26.0",
-		"eslint-plugin-react": "^7.31.11",
-		"eslint-plugin-react-hooks": "^4.6.0",
-		"eslint-plugin-react-hooks-addons": "^0.3.1",
-		"eslint-plugin-simple-import-sort": "^8.0.0",
-		"eslint-plugin-typescript-enum": "^2.1.0",
-		"postcss": "^8.4.19",
-		"prettier": "^2.7.1",
-		"sass": "^1.56.1",
-		"standard-version": "^9.5.0",
-		"stylelint": "^14.15.0",
-		"stylelint-config-prettier": "^9.0.4",
-		"stylelint-config-recess-order": "^3.0.0",
-		"stylelint-config-standard": "^29.0.0",
-		"stylelint-config-standard-scss": "^6.1.0",
-		"swiper": "^8.4.5",
-		"typescript": "^4.9.3",
-		"vite": "^3.2.4"
-	}
+  // 项目名称
+  "name": "edu-management-system",
+  // 是否私有项目
+  "private": true,
+  // 项目版本
+  "version": "0.1.0",
+  // 类型
+  "type": "commonjs",
+  // 项目描述
+  "description": "EDU management system",
+  // 作者信息
+  "author": {
+    "name": "Rococo",
+    "email": "xicons@qq.com",
+    "url": "https://github.com/lookeke"
+  },
+  // 运行环境要求
+  "engines": {
+    "node": ">=14",
+    "npm": ">=8",
+    "yarn": ">=1",
+    "pnpm": ">=6"
+  },
+  // 项目关键字
+  "keywords": [
+    "edu"
+  ],
+  // 主入口文件
+  "main": "./src/main.tsx",
+  // 项目主页
+  "homepage": "https://github.com/lookeke/edu-management-system",
+  // 项目仓库地址
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lookeke/edu-management-system.git"
+  },
+  // 缺陷跟踪系统信息
+  "bugs": {
+    "url": "https://github.com/lookeke/edu-management-system/issues"
+  },
+  // 指令
+  "scripts": {
+    // 开发: 本地HTTP URL
+    "dev:local": "vite --mode _local",
+    // 开发: 本地HTTPS URL
+    "dev:test": "vite --mode test --https --port 443",
+    // 开发: 使用线上  URL
+    "dev:produ": "vite --mode release --https --port 443",
+    // 测试
+    "test": "vitest",
+    // 代码覆盖率
+    "coverage": "vitest run --coverage",
+    // 打包: 使用本地HTTP URL
+    "build": "vite build",
+    // 打包: 使用线上HTTPS URL
+    "build:produ": "vite build --mode release",
+    // 预览
+    "preview": "vite preview",
+    // 桌面开发
+    "tauri": "tauri",
+    // 检测Script文件是否符合规范
+    "eslint": "eslint src/**/**.ts src/**/**.tsx",
+    // 检测Script文件是否符合规范并自动修复
+    "eslint:fix": "eslint --cache src --ext ts,tsx --fix",
+    // 检测Style文件是否符合规范
+    "stylelint": "stylelint src/**/**.{css,scss,sass}",
+    // 检测Style文件是否符合规范并自动修复
+    "stylelint:fix": "stylelint src/**/**.{css,scss,sass} --fix"
+  },
+  // lint-staged 插件配置
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": "prettier --write"
+  },
+  // 生产环境依赖项
+  "dependencies": {
+    "@babel/core": "^7.21.4",
+    "@reduxjs/toolkit": "^1.9.1",
+    "@tanstack/react-query": "^4.29.1",
+    "@tauri-apps/api": "^1.2.0",
+    "crypto-js": "^4.1.1",
+    "echarts": "^5.4.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.0.5",
+    "react-router-dom": "^6.4.4"
+  },
+  // 开发环境依赖项
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.19.1",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/icons-material": "^5.10.14",
+    "@mui/lab": "5.0.0-alpha.110",
+    "@mui/material": "^5.10.14",
+    "@playwright/test": "^1.32.3",
+    "@tanstack/react-query-devtools": "^4.29.1",
+    "@tauri-apps/cli": "^1.2.0",
+    "@types/crypto-js": "^4.1.1",
+    "@types/echarts": "^4.9.16",
+    "@types/node": "^18.11.9",
+    "@types/react": "^18.0.25",
+    "@types/react-dom": "^18.0.9",
+    "@typescript-eslint/eslint-plugin": "^5.44.0",
+    "@typescript-eslint/parser": "^5.44.0",
+    "@vitejs/plugin-basic-ssl": "^1.0.1",
+    "@vitejs/plugin-react": "^2.2.0",
+    "eslint": "^8.28.0",
+    "eslint-config-alloy": "^4.7.0",
+    "eslint-import-resolver-typescript": "^3.5.2",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-react": "^7.31.11",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-hooks-addons": "^0.3.1",
+    "eslint-plugin-simple-import-sort": "^8.0.0",
+    "eslint-plugin-typescript-enum": "^2.1.0",
+    "postcss": "^8.4.19",
+    "prettier": "^2.7.1",
+    "sass": "^1.56.1",
+    "standard-version": "^9.5.0",
+    "stylelint": "^14.15.0",
+    "stylelint-config-prettier": "^9.0.4",
+    "stylelint-config-recess-order": "^3.0.0",
+    "stylelint-config-standard": "^29.0.0",
+    "stylelint-config-standard-scss": "^6.1.0",
+    "swiper": "^8.4.5",
+    "typescript": "^4.9.3",
+    "vite": "^3.2.4",
+    "vitest": "^0.30.1"
+  }
 }
