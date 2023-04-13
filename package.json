@@ -1,6 +1,6 @@
 {
 	"name": "edu-management-system",
-	"version": "0.2.1",
+	"version": "0.2.2",
 	"author": {
 		"name": "Rococo",
 		"email": "xicons@qq.com",
@@ -14,9 +14,9 @@
 	},
 	"scripts": {
 		"prepare": "husky install",
-		"release": "standard-version -- --no-verify",
-		"release:major": "standard-version --release-as major -- --no-verify",
-		"release:minor": "standard-version --release-as minor -- --no-verify"
+		"release": "standard-version -- --no-verify && cd client && standard-version -- --no-verify",
+		"release:major": "standard-version --release-as major -- --no-verify && cd client && standard-version --release-as major -- --no-verify",
+		"release:minor": "standard-version --release-as minor -- --no-verify && cd client && standard-version --release-as minor -- --no-verify"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^17.3.0",
