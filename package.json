@@ -14,9 +14,9 @@
 	},
 	"scripts": {
 		"prepare": "husky install",
-		"release": "standard-version -- --no-verify",
-		"release:major": "standard-version --release-as major -- --no-verify && cd client && standard-version --release-as major -- --no-verify",
-		"release:minor": "standard-version --release-as minor -- --no-verify && cd client && standard-version --release-as minor -- --no-verify"
+		"release": "standard-version -- --no-verify; cd client;standard-version --release-as major --no-verify",
+		"release:major": "standard-version --release-as major -- --no-verify",
+		"release:minor": "standard-version --release-as minor -- --no-verify"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^17.3.0",
