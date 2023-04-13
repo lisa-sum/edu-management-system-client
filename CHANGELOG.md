@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.3](https://gitee.com/yunyn/edu-management-system/compare/v0.2.2...v0.2.3) (2023-04-13)
+
+
+### 🚀 Chore | 构建/工程依赖/工具
+
+* **release:** 0.2.2 ([b8dadeb](https://gitee.com/yunyn/edu-management-system/commit/b8dadebf825f4b2595c92d730b1ae9c3601f4dc1))
+
 ### 0.2.2 (2023-04-13)
 
 
