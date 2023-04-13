@@ -1,7 +1,7 @@
 {
 	"name": "edu-management-system-client",
 	"private": true,
-	"version": "0.2.1",
+	"version": "0.2.2",
 	"type": "commonjs",
 	"description": "EDU management system client",
 	"author": {
@@ -16,7 +16,7 @@
 		"pnpm": ">=6"
 	},
 	"keywords": [
-		"vpn"
+		"edu management system"
 	],
 	"main": "./src/main.tsx",
 	"homepage": "https://github.com/lookeke/edu-management-system",
