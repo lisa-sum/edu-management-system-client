@@ -1,13 +1,13 @@
-import { Alert, AlertTitle, Button } from '@mui/material'
-import { useNavigate } from 'react-router-dom'
+import {Alert, AlertTitle, Button} from '@mui/material'
+import {useNavigate} from 'react-router-dom'
 
 import AlertText from '@/components/AlertText'
 import AppBar from '@/components/Layout/AppBar'
 import Footer from '@/components/Layout/Footer'
 import Setting from '@/components/Setting'
-import { toggleRole } from '@/features/user/profile'
+import {toggleRole} from '@/features/user/profile'
 import Chat from '@/pages/im/chat'
-import Login from '@/pages/Login'
+import Login from '@/pages/login'
 // Admin Page
 import Class from '@/pages/role/admin/class'
 import College from '@/pages/role/admin/college'
@@ -23,9 +23,9 @@ import Inquiry from '@/pages/role/student/Inquiry'
 import Profile from '@/pages/role/student/Profile'
 import Schedule from '@/pages/role/student/Schedule'
 // Student Page End
-import { RootState } from '@/store'
-import type { RouteList } from '@/type'
-import { useAppDispatch, useAppSelector } from '@/utils/hooks'
+import {RootState} from '@/store'
+import type {RouteList} from '@/type'
+import {useAppDispatch, useAppSelector} from '@/utils/hooks'
 
 // Teacher Router
 const teacherRoutes: RouteList[] = [
