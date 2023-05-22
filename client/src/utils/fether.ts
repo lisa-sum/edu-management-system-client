@@ -57,8 +57,8 @@ const METHODS_BODY = ['POST', 'PUT', 'PATCH'] as const
 // 请求方法
 const METHODS = [...METHODS_BODY, ...METHODS_PARAMS] as const
 
-/** Fetcher
- * @description 请求封装
+/** Fetcher 网络请求请求封装
+ * @description 根据请求方法进行对应的参数请求
  * @since 11/04/2023 8:47 am
  * @param {string} uri 请求地址
  * @param {string} method 请求方法

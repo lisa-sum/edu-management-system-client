@@ -18,16 +18,15 @@ const getClassList = (specialty: string) => {
 }
 
 const ShowClass = ({specialty}: {specialty: string}) => {
-  const {data, isLoading, isSuccess} = useQuery<ClassList[]>(
-    ['getClassList'],
-    () => getClassList(specialty),
+  const {data, isLoading} = useQuery<ClassList[]>(['getClassList'], () =>
+    getClassList(specialty),
   )
 
   if (isLoading) {
     return <p>Loading</p>
   }
 
-  if (isSuccess) {
+  if (data) {
     return (
       <Autocomplete
         disablePortal

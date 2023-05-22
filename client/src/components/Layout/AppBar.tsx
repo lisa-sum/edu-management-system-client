@@ -48,12 +48,9 @@ type ListIcons = {
 }
 
 // 列表子项组件响应式
-const ListItemCompReactive = styled(Box)(({ theme }) => ({
-  [theme.breakpoints.down('lg')]: {
-    width: '145px',
-  },
+const ListItemCompReactive = styled(Box)(({theme}) => ({
   [theme.breakpoints.up('lg')]: {
-    width: '230px',
+    width: '250px',
   },
 }))
 
@@ -98,10 +95,22 @@ const ListItemComp = ({
 
 // 侧边栏组件
 function Aside({routes}: {routes: RouteList[]}) {
+  const [shrink, setShrink] = useState<string>('200px')
+  const [state, setState] = useState<boolean>(false)
+  const shrinkHandle = () => {
+    setState(!state)
+    if (state) {
+      setShrink('200px')
+    } else {
+      setShrink('100px')
+    }
+  }
+
   return (
     <Box
       component="section"
       sx={{
+        width: shrink,
         gridArea: 'left',
         borderRight: '5px solid #f3f3f5',
       }}
@@ -131,9 +140,7 @@ function Aside({routes}: {routes: RouteList[]}) {
         direction="column"
         justifyContent="center"
         sx={{
-          xs: {
-            width: '150px',
-          },
+          width: shrink,
         }}
       >
         <List>
@@ -146,6 +153,9 @@ function Aside({routes}: {routes: RouteList[]}) {
           <ListItemComp item={{path: '/quit', label: '退出'}}>
             <Quit />
           </ListItemComp>
+          <Box onClick={shrinkHandle}>
+            {state ? <p>{'>'}</p> : <p>{'<'}</p>}
+          </Box>
         </List>
       </Grid>
     </Box>
@@ -283,7 +293,7 @@ function Container({routes}: {routes: RouteList[]}) {
           ))}
           <Route
             element={<Chat />}
-            path='/ws/chat'
+            path="/ws/chat"
           />
         </Routes>
       </Box>
@@ -334,7 +344,7 @@ const Notifications = ({toggleTheme}: {toggleTheme: () => void}) => {
             justifyContent: 'space-between',
             pt: '85px',
             pl: '50px',
-            width: '150px',
+            width: '100%',
           }}
         >
           {listIcons.map((item) => (

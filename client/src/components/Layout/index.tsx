@@ -12,12 +12,11 @@ import Login from '@/pages/login'
 import Class from '@/pages/role/admin/class'
 import College from '@/pages/role/admin/college'
 import Mark from '@/pages/role/admin/mark'
-import Register from '@/pages/role/admin/register'
 import Specialty from '@/pages/role/admin/specialty'
 import Teacher from '@/pages/role/admin/teacher'
 // Admin Page End
 // Student Page Start
-import ApplyForClassRoom from '@/pages/role/student/ApplyForClassRoom'
+import ApplyClassRoom from '@/pages/role/student/ApplyClassRoom'
 import DropOut from '@/pages/role/student/DropOut'
 import Inquiry from '@/pages/role/student/Inquiry'
 import Profile from '@/pages/role/student/Profile'
@@ -32,27 +31,23 @@ const teacherRoutes: RouteList[] = [
   {element: <Profile />, path: '/profile', label: '个人'},
   {element: <Schedule />, path: '/schedule', label: '课程表'},
   {
-    element: <ApplyForClassRoom />,
-    path: '/applyForClassRoom',
+    element: <ApplyClassRoom />,
+    path: '/applyClassRoom',
     label: '教室申请',
   },
   {element: <Mark />, path: '/mark', label: '开设课程'},
   {element: <Chat />, path: '/ws/chat', label: '即时聊天'},
   {element: <Setting />, path: '/setting', label: '设置'},
-  //	{ element: <Quit />, path: '/quit', label: '退出' },
 ]
 
 // Student Router
 const studentRoutes: RouteList[] = [
-  {element: <Register />, path: '/register', label: '注册'},
   {element: <Profile />, path: '/profile', label: '个人'},
-  {element: <Mark />, path: '/mark', label: '课程管理'},
   {element: <DropOut />, path: '/dropOut', label: '退课'},
   {element: <Schedule />, path: '/schedule', label: '课程表'},
   {element: <Inquiry />, path: '/inquiry', label: '成绩查询'},
   {element: <Chat />, path: '/ws/chat', label: '即时聊天'},
   {element: <Setting />, path: '/setting', label: '设置'},
-  //	{ element: <Quit />, path: '/quit', label: '退出' },
 ]
 
 // Admin Router
