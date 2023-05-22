@@ -7,19 +7,19 @@
  *  */
 export const addCollege = async (collegeName: string, collegeInfo: string) => {
 	return await fetch(import.meta.env.VITE_APP_COLLEGE, {
-		method: 'PUT',
-		headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` },
-		body: JSON.stringify({
-			name: collegeName,
-			description: collegeInfo,
-		}),
-	}).then(async (res) => {
-		const result = await res.json()
-		if (result.code !== 200 || !res.ok) {
-			throw new Error(result.message)
-		}
-		return result
-	})
+    method: 'PUT',
+    headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`},
+    body: JSON.stringify({
+      name: collegeName,
+      description: collegeInfo,
+    }),
+  }).then(async (res) => {
+    const result = await res.json()
+    if (result.code !== 200 || !res.ok) {
+      throw new Error(result.message)
+    }
+    return result
+  })
 }
 
 /**
@@ -29,16 +29,19 @@ export const addCollege = async (collegeName: string, collegeInfo: string) => {
  * @return
  *  */
 export const deleteCollege = async (collegeName: string) => {
-	return await fetch(`${import.meta.env.VITE_APP_COLLEGE}?delete=${collegeName}`, {
-		method: 'DELETE',
-		headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` },
-	}).then(async (res) => {
-		const result = await res.json()
-		if (result.code !== 200 || !res.ok) {
-			throw new Error(result.message)
-		}
-		return result
-	})
+  return await fetch(
+    `${import.meta.env.VITE_APP_COLLEGE}?delete=${collegeName}`,
+    {
+      method: 'DELETE',
+      headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`},
+    },
+  ).then(async (res) => {
+    const result = await res.json()
+    if (result.code !== 200 || !res.ok) {
+      throw new Error(result.message)
+    }
+    return result
+  })
 }
 
 /**
@@ -49,22 +52,26 @@ export const deleteCollege = async (collegeName: string) => {
  * @param collegeInfo {string} 修改后的学院描述
  * @return 修改后的信息
  *  */
-export const updateCollege = async (oldCollegeName: string, newCollegeName: string, collegeInfo: string) => {
+export const updateCollege = async(
+	oldCollegeName: string,
+	newCollegeName: string,
+	collegeInfo: string,
+) => {
 	return await fetch(import.meta.env.VITE_APP_COLLEGE, {
-		method: 'POST',
-		headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` },
-		body: JSON.stringify({
-			oldName: oldCollegeName,
-			newName: newCollegeName,
-			description: collegeInfo,
-		}),
-	}).then(async (res) => {
-		const result = await res.json()
-		if (result.code !== 200 || !res.ok) {
-			throw new Error(result.message)
-		}
-		return result
-	})
+    method: 'POST',
+    headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`},
+    body: JSON.stringify({
+      oldName: oldCollegeName,
+      newName: newCollegeName,
+      description: collegeInfo,
+    }),
+  }).then(async (res) => {
+    const result = await res.json()
+    if (result.code !== 200 || !res.ok) {
+      throw new Error(result.message)
+    }
+    return result
+  })
 }
 
 /**
@@ -75,13 +82,13 @@ export const updateCollege = async (oldCollegeName: string, newCollegeName: stri
  *  */
 export const getCollegeList = async (query = 'all') => {
 	return await fetch(`${import.meta.env.VITE_APP_COLLEGE}?query=${query}`, {
-		method: 'GET',
-		headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` },
-	}).then(async (res) => {
-		const result = await res.json()
-		if (result.code !== 200 || result.body === null) {
-			return new Error(result.message)
-		}
-		return result
-	})
+    method: 'GET',
+    headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`},
+  }).then(async (res) => {
+    const result = await res.json()
+    if (result.code !== 200 || result.body === null) {
+      return new Error(result.message)
+    }
+    return result
+  })
 }

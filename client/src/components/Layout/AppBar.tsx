@@ -15,7 +15,7 @@ import {
 } from '@mui/material'
 import Grid2 from '@mui/material/Unstable_Grid2'
 import * as echarts from 'echarts'
-import {useEffect, useRef, useState} from 'react'
+import {ReactNode, useEffect, useRef, useState} from 'react'
 import {useDispatch} from 'react-redux'
 import {
   Link as RouterLink,
@@ -34,6 +34,7 @@ import studentIco from '@/assets/icons/student.svg'
 import teacherIco from '@/assets/icons/teacher.svg'
 import themeModeIco from '@/assets/icons/themeModeIco.svg'
 import Footer from '@/components/Layout/Footer'
+import Quit from '@/components/Quit'
 import {toggleThemeMode} from '@/features/theme/mode'
 import Chat from '@/pages/im/chat'
 import {RootState} from '@/store'
@@ -46,33 +47,52 @@ type ListIcons = {
   path: string
 }
 
+// 列表子项组件响应式
+const ListItemCompReactive = styled(Box)(({ theme }) => ({
+  [theme.breakpoints.down('lg')]: {
+    width: '145px',
+  },
+  [theme.breakpoints.up('lg')]: {
+    width: '230px',
+  },
+}))
+
 // 列表子项组件
-const ListItemComp = ({item}: {item: {label: string; path: string}}) => {
+const ListItemComp = ({
+  item,
+  children,
+}: {
+  item: {label: string; path: string}
+  children?: ReactNode
+}) => {
   const location = useLocation()
   return (
-    <ListItem
-      sx={{
-        mb: '10px',
-        width: '200px',
-        height: '50px',
-        borderRadius: '7px',
-        bgcolor: location.pathname === item.path ? '#f3f3f5' : 'transparent',
-      }}
-    >
-      <Link
-        component={RouterLink}
+    <ListItemCompReactive>
+      <ListItem
         sx={{
-          width: '200px',
+          mb: '10px',
           height: '50px',
-          lineHeight: '50px',
-          textDecoration: 'none',
-          ml: '20px',
+          borderRadius: '7px',
+          bgcolor: location.pathname === item.path ? '#f3f3f5' : 'transparent',
         }}
-        to={item.path}
       >
-        {item.label}
-      </Link>
-    </ListItem>
+        {children || (
+          <Link
+            component={RouterLink}
+            sx={{
+              width: '100%',
+              height: '50px',
+              lineHeight: '50px',
+              textDecoration: 'none',
+              textAlign: 'center',
+            }}
+            to={item.path}
+          >
+            {item.label}
+          </Link>
+        )}
+      </ListItem>
+    </ListItemCompReactive>
   )
 }
 
@@ -123,8 +143,9 @@ function Aside({routes}: {routes: RouteList[]}) {
               item={item}
             />
           ))}
-          <ListItemComp item={{label: '设置', path: '/settings'}} />
-          <ListItemComp item={{label: '退出', path: '/quit'}} />
+          <ListItemComp item={{path: '/quit', label: '退出'}}>
+            <Quit />
+          </ListItemComp>
         </List>
       </Grid>
     </Box>
@@ -213,61 +234,58 @@ function Container({routes}: {routes: RouteList[]}) {
     }
   }, [])
   return (
-    <Box>
+    <Box
+      component="section"
+      sx={{
+        gridArea: 'content',
+        pt: '85px',
+        pr: '75px',
+        borderRight: '5px solid #f3f3f5',
+      }}
+    >
+      {/* 标题 */}
+      <Grid2 container>
+        <Grid2
+          md={5}
+          xs={6}
+        >
+          <Typography
+            sx={{
+              ml: '70px',
+              fontSize: '48px',
+            }}
+          >
+            {cite}
+          </Typography>
+        </Grid2>
+        <Grid2
+          md={7}
+          xs={6}
+        >
+          <Search routes={routes} />
+        </Grid2>
+      </Grid2>
+
       <Box
-        component="section"
         sx={{
-          gridArea: 'content',
-          height: '50vh',
-          pt: '85px',
-          pr: '75px',
-          borderRight: '5px solid #f3f3f5',
+          ml: '70px',
         }}
       >
-        {/* 标题 */}
-        <Grid2 container>
-          <Grid2
-            md={5}
-            xs={6}
-          >
-            <Typography
-              sx={{
-                ml: '70px',
-                fontSize: '48px',
-              }}
-            >
-              {cite}
-            </Typography>
-          </Grid2>
-          <Grid2
-            md={7}
-            xs={6}
-          >
-            <Search routes={routes} />
-          </Grid2>
-        </Grid2>
-
-        <Box
-          sx={{
-            ml: '70px',
-          }}
-        >
-          <Routes>
-            {routes.map((item: RouteList) => (
-              <Route
-                key={item.label}
-                element={item.element}
-                path={item.path}
-              >
-                {item.label}
-              </Route>
-            ))}
+        <Routes>
+          {routes.map((item: RouteList) => (
             <Route
-              element={<Chat />}
-              path="/ws/chat"
-            />
-          </Routes>
-        </Box>
+              key={item.label}
+              element={item.element}
+              path={item.path}
+            >
+              {item.label}
+            </Route>
+          ))}
+          <Route
+            element={<Chat />}
+            path='/ws/chat'
+          />
+        </Routes>
       </Box>
     </Box>
   )
@@ -307,7 +325,6 @@ const Notifications = ({toggleTheme}: {toggleTheme: () => void}) => {
       component="section"
       sx={{
         gridArea: 'right',
-        height: '50vh',
       }}
     >
       <Box>
@@ -381,20 +398,24 @@ const Notifications = ({toggleTheme}: {toggleTheme: () => void}) => {
     </Box>
   )
 }
+
 // 页面总体布局排列组件
 const StyledSlider = styled(Box)(({theme}) => ({
   display: 'grid',
-  height: '100vh',
+
   backgroundColor: useAppSelector(
     (state: RootState) => state.theme.value.bgcolor,
   ),
   [theme.breakpoints.down('lg')]: {
+    width: '100vw',
+    height: '100vh',
     gridTemplateColumns: '150px minmax(775px, 920px)',
     gridTemplateAreas: `'left content'
 			'left right'`,
   },
   [theme.breakpoints.up('lg')]: {
     width: '100vw',
+    height: '100vh',
     gridTemplateColumns: `250px auto 415px`,
     gridTemplateAreas: `'left content right'`,
   },

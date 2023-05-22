@@ -1,23 +1,13 @@
-import {
-  alpha,
-  Box,
-  Button,
-  FormControl,
-  InputBase,
-  InputLabel,
-  styled,
-  Theme,
-  Typography,
-} from '@mui/material'
+import { alpha, Box, Button, FormControl, InputBase, InputLabel, styled, Theme, Typography } from '@mui/material'
 import Grid2 from '@mui/material/Unstable_Grid2'
-import {useMutation} from '@tanstack/react-query'
-import {ChangeEvent, useEffect, useState} from 'react'
+import { useMutation } from '@tanstack/react-query'
+import { ChangeEvent, useState } from 'react'
 
 import SelectCollege from '@/components/selectCollege'
-import {RootState} from '@/store'
-import {BootstrapInputProps} from '@/type'
-import {fetcher} from '@/utils/fether'
-import {useAppSelector} from '@/utils/hooks'
+import { RootState } from '@/store'
+import { BootstrapInputProps } from '@/type'
+import { fetcher } from '@/utils/fether'
+import { useAppSelector } from '@/utils/hooks'
 
 // 布局组件
 const GridBox = styled(Grid2)(({theme}) => ({
@@ -107,6 +97,10 @@ export default function College() {
     },
   })
 
+  const updateCollege = (newValue: string) => {
+    setOldCollegeName(newValue)
+  }
+
   const updateCollegeData = useMutation({
     mutationFn: ({
       oldCollegeName,
@@ -135,10 +129,6 @@ export default function College() {
     },
   })
 
-  useEffect(() => {
-    console.log(addCollegeInfo)
-  }, [addCollegeInfo])
-
   return (
     <Box>
       <GridBox
@@ -155,7 +145,7 @@ export default function College() {
           lg={6}
           md={12}
         >
-          <SelectCollege setCollegeName={setOldCollegeName} />
+          <SelectCollege updateCollege={setOldCollegeName} />
         </Grid2>
         <Grid2
           lg={6}
@@ -301,7 +291,7 @@ export default function College() {
           lg={6}
           md={12}
         >
-          <SelectCollege setCollegeName={setOldCollegeName} />
+          <SelectCollege updateCollege={updateCollege} />
         </Grid2>
 
         <Grid2

@@ -1,10 +1,11 @@
-import {Alert, AlertTitle, Button} from '@mui/material'
-import {useNavigate} from 'react-router-dom'
+import { Alert, AlertTitle, Button } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
 
 import AlertText from '@/components/AlertText'
 import AppBar from '@/components/Layout/AppBar'
 import Footer from '@/components/Layout/Footer'
-import {toggleRole} from '@/features/user/profile'
+import Setting from '@/components/Setting'
+import { toggleRole } from '@/features/user/profile'
 import Chat from '@/pages/im/chat'
 import Login from '@/pages/Login'
 // Admin Page
@@ -22,9 +23,9 @@ import Inquiry from '@/pages/role/student/Inquiry'
 import Profile from '@/pages/role/student/Profile'
 import Schedule from '@/pages/role/student/Schedule'
 // Student Page End
-import {RootState} from '@/store'
-import type {RouteList} from '@/type'
-import {useAppDispatch, useAppSelector} from '@/utils/hooks'
+import { RootState } from '@/store'
+import type { RouteList } from '@/type'
+import { useAppDispatch, useAppSelector } from '@/utils/hooks'
 
 // Teacher Router
 const teacherRoutes: RouteList[] = [
@@ -37,6 +38,8 @@ const teacherRoutes: RouteList[] = [
   },
   {element: <Mark />, path: '/mark', label: '开设课程'},
   {element: <Chat />, path: '/ws/chat', label: '即时聊天'},
+  {element: <Setting />, path: '/setting', label: '设置'},
+  //	{ element: <Quit />, path: '/quit', label: '退出' },
 ]
 
 // Student Router
@@ -48,6 +51,8 @@ const studentRoutes: RouteList[] = [
   {element: <Schedule />, path: '/schedule', label: '课程表'},
   {element: <Inquiry />, path: '/inquiry', label: '成绩查询'},
   {element: <Chat />, path: '/ws/chat', label: '即时聊天'},
+  {element: <Setting />, path: '/setting', label: '设置'},
+  //	{ element: <Quit />, path: '/quit', label: '退出' },
 ]
 
 // Admin Router
@@ -58,6 +63,7 @@ const adminRoutes: RouteList[] = [
   {element: <Mark />, path: '/mark', label: '课程管理'},
   {element: <Teacher />, path: '/registration', label: '教师管理'},
   {element: <Chat />, path: '/ws/chat', label: '即时聊天'},
+  {element: <Setting />, path: '/setting', label: '设置'},
 ]
 
 const Role = ({

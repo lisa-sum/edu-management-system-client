@@ -6,15 +6,15 @@
  *  */
 export const getSpecialty = async (query = 'all') => {
 	return await fetch(`${import.meta.env.VITE_APP_SPECIALTY}?query=${query}`, {
-		method: 'GET',
-		headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` },
-	}).then(async (res) => {
-		const result = await res.json()
-		if ((result.code >= 200 && result.code < 400) || result.body !== null) {
-			return result
-		}
-		throw new Error(result.message)
-	})
+    method: 'GET',
+    headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`},
+  }).then(async (res) => {
+    const result = await res.json()
+    if ((result.code >= 200 && result.code < 400) || result.body !== null) {
+      return result
+    }
+    throw new Error(result.message)
+  })
 }
 
 /**
@@ -25,20 +25,24 @@ export const getSpecialty = async (query = 'all') => {
  * @param newSpecialtyDescription {string} 新专业描述
  * @return 修改信息
  *  */
-export const updateSpecialtyOne = async (oldSpecialtyName: string, newSpecialtyName: string, newSpecialtyDescription: string) => {
+export const updateSpecialtyOne = async(
+	oldSpecialtyName: string,
+	newSpecialtyName: string,
+	newSpecialtyDescription: string,
+) => {
 	return await fetch(`${import.meta.env.VITE_APP_SPECIALTY}`, {
-		method: 'PATCH',
-		headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` },
-		body: JSON.stringify({
-			oldSpecialtyName,
-			newSpecialtyName,
-			newSpecialtyDescription,
-		}),
-	}).then(async (res) => {
-		const result = await res.json()
-		if (result.code !== 200 || result.body === null) {
-			return new Error(result.message)
-		}
-		return result
-	})
+    method: 'PATCH',
+    headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`},
+    body: JSON.stringify({
+      oldSpecialtyName,
+      newSpecialtyName,
+      newSpecialtyDescription,
+    }),
+  }).then(async (res) => {
+    const result = await res.json()
+    if (result.code !== 200 || result.body === null) {
+      return new Error(result.message)
+    }
+    return result
+  })
 }

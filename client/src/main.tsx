@@ -1,4 +1,4 @@
-import '@/styles/global.css' // 全局样式
+import '@/styles/global.css' // 统一浏览器原始样式
 
 import ReactDOM from 'react-dom/client'
 

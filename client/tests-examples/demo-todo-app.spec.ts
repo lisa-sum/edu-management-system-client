@@ -1,4 +1,4 @@
-import {test, expect, type Page} from '@playwright/test'
+import {type Page, expect, test} from '@playwright/test'
 
 test.beforeEach(async ({page}) => {
   await page.goto('https://demo.playwright.dev/todomvc')
@@ -247,7 +247,8 @@ test.describe('Editing', () => {
       .nth(1)
       .getByRole('textbox', {name: 'Edit'})
       .fill('    buy some sausages    ')
-    await todoItems.nth(1).getByRole('textbox', {name: 'Edit'}).press('Enter')
+    await todoItems.nth(1).getByRole('textbox', {name: 'Edit'})
+.press('Enter')
 
     await expect(todoItems).toHaveText([
       TODO_ITEMS[0],
@@ -262,8 +263,10 @@ test.describe('Editing', () => {
   }) => {
     const todoItems = page.getByTestId('todo-item')
     await todoItems.nth(1).dblclick()
-    await todoItems.nth(1).getByRole('textbox', {name: 'Edit'}).fill('')
-    await todoItems.nth(1).getByRole('textbox', {name: 'Edit'}).press('Enter')
+    await todoItems.nth(1).getByRole('textbox', {name: 'Edit'})
+.fill('')
+    await todoItems.nth(1).getByRole('textbox', {name: 'Edit'})
+.press('Enter')
 
     await expect(todoItems).toHaveText([TODO_ITEMS[0], TODO_ITEMS[2]])
   })
@@ -275,7 +278,8 @@ test.describe('Editing', () => {
       .nth(1)
       .getByRole('textbox', {name: 'Edit'})
       .fill('buy some sausages')
-    await todoItems.nth(1).getByRole('textbox', {name: 'Edit'}).press('Escape')
+    await todoItems.nth(1).getByRole('textbox', {name: 'Edit'})
+.press('Escape')
     await expect(todoItems).toHaveText(TODO_ITEMS)
   })
 })
@@ -307,7 +311,8 @@ test.describe('Clear completed button', () => {
   })
 
   test('should display the correct text', async ({page}) => {
-    await page.locator('.todo-list li .toggle').first().check()
+    await page.locator('.todo-list li .toggle').first()
+.check()
     await expect(
       page.getByRole('button', {name: 'Clear completed'}),
     ).toBeVisible()
@@ -315,7 +320,8 @@ test.describe('Clear completed button', () => {
 
   test('should remove completed items when clicked', async ({page}) => {
     const todoItems = page.getByTestId('todo-item')
-    await todoItems.nth(1).getByRole('checkbox').check()
+    await todoItems.nth(1).getByRole('checkbox')
+.check()
     await page.getByRole('button', {name: 'Clear completed'}).click()
     await expect(todoItems).toHaveCount(2)
     await expect(todoItems).toHaveText([TODO_ITEMS[0], TODO_ITEMS[2]])
@@ -324,7 +330,8 @@ test.describe('Clear completed button', () => {
   test('should be hidden when there are no items that are completed', async ({
     page,
   }) => {
-    await page.locator('.todo-list li .toggle').first().check()
+    await page.locator('.todo-list li .toggle').first()
+.check()
     await page.getByRole('button', {name: 'Clear completed'}).click()
     await expect(
       page.getByRole('button', {name: 'Clear completed'}),
@@ -371,7 +378,9 @@ test.describe('Routing', () => {
 
   test('should allow me to display active items', async ({page}) => {
     const todoItem = page.getByTestId('todo-item')
-    await page.getByTestId('todo-item').nth(1).getByRole('checkbox').check()
+    await page.getByTestId('todo-item').nth(1)
+.getByRole('checkbox')
+.check()
 
     await checkNumberOfCompletedTodosInLocalStorage(page, 1)
     await page.getByRole('link', {name: 'Active'}).click()
@@ -381,7 +390,9 @@ test.describe('Routing', () => {
 
   test('should respect the back button', async ({page}) => {
     const todoItem = page.getByTestId('todo-item')
-    await page.getByTestId('todo-item').nth(1).getByRole('checkbox').check()
+    await page.getByTestId('todo-item').nth(1)
+.getByRole('checkbox')
+.check()
 
     await checkNumberOfCompletedTodosInLocalStorage(page, 1)
 
@@ -406,14 +417,18 @@ test.describe('Routing', () => {
   })
 
   test('should allow me to display completed items', async ({page}) => {
-    await page.getByTestId('todo-item').nth(1).getByRole('checkbox').check()
+    await page.getByTestId('todo-item').nth(1)
+.getByRole('checkbox')
+.check()
     await checkNumberOfCompletedTodosInLocalStorage(page, 1)
     await page.getByRole('link', {name: 'Completed'}).click()
     await expect(page.getByTestId('todo-item')).toHaveCount(1)
   })
 
   test('should allow me to display all items', async ({page}) => {
-    await page.getByTestId('todo-item').nth(1).getByRole('checkbox').check()
+    await page.getByTestId('todo-item').nth(1)
+.getByRole('checkbox')
+.check()
     await checkNumberOfCompletedTodosInLocalStorage(page, 1)
     await page.getByRole('link', {name: 'Active'}).click()
     await page.getByRole('link', {name: 'Completed'}).click()
@@ -424,7 +439,7 @@ test.describe('Routing', () => {
   test('should highlight the currently applied filter', async ({page}) => {
     await expect(page.getByRole('link', {name: 'All'})).toHaveClass('selected')
 
-    //create locators for active and completed links
+    // create locators for active and completed links
     const activeLink = page.getByRole('link', {name: 'Active'})
     const completedLink = page.getByRole('link', {name: 'Completed'})
     await activeLink.click()

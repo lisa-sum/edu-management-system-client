@@ -1,12 +1,14 @@
 * {
-	padding: 0;
-	margin: 0;
+	margin  : 0;
+	padding : 0;
 }
 
-/* 匹配根标签容器的空内容 */
+/* 字体 */
+@font-face {
+	font-family : "HYJiaShuJ", sans-serif;
+	src         : url("../assets/fonts/HYJiaShuJ.ttf");
+}
 
-/* #root :empty::after{ */
-
-/* 	content: '暂无数据'; */
-
-/* } */
+body {
+	font-family : "HYJiaShuJ", sans-serif;
+}

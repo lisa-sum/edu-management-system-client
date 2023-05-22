@@ -1,40 +1,56 @@
 import Autocomplete from '@mui/material/Autocomplete'
 import TextField from '@mui/material/TextField'
-import { useEffect, useState } from 'react'
+import {useQuery} from '@tanstack/react-query'
 
-import type { ClassList } from '@/type'
-import { fetcher } from '@/utils/fether'
+import type {ClassList} from '@/type'
+import {fetcher} from '@/utils/fether'
 
-export default function SelectClass({ specialty }: { specialty: string }) {
-	const [options, setOptions] = useState<readonly ClassList[]>([])
+const getClassList = (specialty: string) => {
+  return fetcher<ClassList[]>(import.meta.env.VITE_APP_CLASS)({
+    'specialty': specialty,
+  })
+    .then((res) => {
+      return res.body
+    })
+    .catch((err) => {
+      console.error(err)
+    })
+}
 
-	console.log(options)
-	useEffect(() => {
-		fetcher<ClassList[]>(import.meta.env.VITE_APP_CLASS)(specialty)
-			.then((res) => {
-				console.log(res)
-				// console.log(res.json())
-				console.log(res.body)
-				setOptions(res.body)
-			})
-			.catch((err) => {
-				console.error(err)
-			})
-	}, [specialty])
+const ShowClass = ({specialty}: {specialty: string}) => {
+  const {data, isLoading, isSuccess} = useQuery<ClassList[]>(
+    ['getClassList'],
+    () => getClassList(specialty),
+  )
 
-	return (
-		<Autocomplete
-			disablePortal
-			getOptionLabel={(option) => option.className}
-			id="select-class"
-			options={options}
-			renderInput={(params) => (
-				<TextField
-					{...params}
-					label="选择班级"
-				/>
-			)}
-			sx={{ width: '400px' }}
-		/>
-	)
+  if (isLoading) {
+    return <p>Loading</p>
+  }
+
+  if (isSuccess) {
+    return (
+      <Autocomplete
+        disablePortal
+        getOptionLabel={(option) => option.name}
+        id="select-class"
+        options={data}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            label="选择班级"
+          />
+        )}
+        sx={{width: '400px'}}
+      />
+    )
+  }
+  return <p>Error</p>
+}
+
+export default function SelectClass({specialty}: {specialty: string}) {
+  if (specialty !== '') {
+    return <ShowClass specialty={specialty} />
+  }
+
+  return <p>请选择专业</p>
 }

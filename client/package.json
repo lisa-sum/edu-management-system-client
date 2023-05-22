@@ -1,104 +1,104 @@
 {
-	"name": "edu-management-system-client",
-	"private": true,
-	"version": "0.2.2",
-	"type": "commonjs",
-	"description": "EDU management system client",
-	"author": {
-		"name": "Rococo",
-		"email": "xicons@qq.com",
-		"url": "https://github.com/lookeke"
-	},
-	"engines": {
-		"node": ">=14",
-		"npm": ">=8",
-		"yarn": ">=1",
-		"pnpm": ">=6"
-	},
-	"keywords": [
-		"edu management system"
-	],
-	"main": "./src/main.tsx",
-	"homepage": "https://github.com/lookeke/edu-management-system",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/lookeke/edu-management-system.git"
-	},
-	"bugs": {
-		"url": "https://github.com/lookeke/edu-management-system/issues"
-	},
-	"scripts": {
-		"dev": "vite --mode development",
-		"dev:test": "vite --mode test --https --port 443",
-		"dev:prod": "vite --mode production --https --port 443",
-		"test": "vitest",
-		"coverage": "vitest run --coverage",
-		"build": "vite build",
-		"build:prod": "vite build --mode production",
-		"preview": "vite preview",
-		"tauri": "tauri",
-		"eslint": "eslint src/**/**.ts src/**/**.tsx",
-		"eslint:fix": "eslint --cache src --ext ts,tsx --fix",
-		"stylelint": "stylelint src/**/**.{css,scss,sass}",
-		"stylelint:fix": "stylelint src/**/**.{css,scss,sass} --fix"
-	},
-	"lint-staged": {
-		"*.{js,jsx,ts,tsx}": "prettier --write"
-	},
-	"dependencies": {
-		"@tauri-apps/api": "^1.2.0",
-		"echarts": "^5.4.1",
-		"react": "^18.2.0",
-		"react-dom": "^18.2.0",
-		"react-router-dom": "^6.4.4"
-	},
-	"devDependencies": {
-		"@babel/core": "^7.21.4",
-		"@babel/eslint-parser": "^7.19.1",
-		"@emotion/react": "^11.10.5",
-		"@emotion/styled": "^11.10.5",
-		"@mui/icons-material": "^5.10.14",
-		"@mui/lab": "5.0.0-alpha.110",
-		"@mui/material": "^5.10.14",
-		"@playwright/test": "^1.32.3",
-		"@reduxjs/toolkit": "^1.9.3",
-		"@tanstack/react-query": "^4.29.1",
-		"@tanstack/react-query-devtools": "^4.29.1",
-		"@tauri-apps/cli": "^1.2.0",
-		"@testing-library/react": "^14.0.0",
-		"@types/crypto-js": "^4.1.1",
-		"@types/echarts": "^4.9.16",
-		"@types/node": "^18.11.9",
-		"@types/react": "^18.0.25",
-		"@types/react-dom": "^18.0.9",
-		"@typescript-eslint/eslint-plugin": "^5.44.0",
-		"@typescript-eslint/parser": "^5.44.0",
-		"@vitejs/plugin-basic-ssl": "^1.0.1",
-		"@vitejs/plugin-react-swc": "^3.3.0",
-		"crypto-js": "^4.1.1",
-		"eslint": "^8.28.0",
-		"eslint-config-alloy": "^4.7.0",
-		"eslint-import-resolver-typescript": "^3.5.2",
-		"eslint-plugin-import": "^2.26.0",
-		"eslint-plugin-react": "^7.31.11",
-		"eslint-plugin-react-hooks": "^4.6.0",
-		"eslint-plugin-react-hooks-addons": "^0.3.1",
-		"eslint-plugin-simple-import-sort": "^8.0.0",
-		"eslint-plugin-typescript-enum": "^2.1.0",
-		"postcss": "^8.4.19",
-		"prettier": "^2.7.1",
-		"react-redux": "^8.0.5",
-		"react-test-renderer": "^18.2.0",
-		"sass": "^1.56.1",
-		"standard-version": "^9.5.0",
-		"stylelint": "^14.15.0",
-		"stylelint-config-prettier": "^9.0.4",
-		"stylelint-config-recess-order": "^3.0.0",
-		"stylelint-config-standard": "^29.0.0",
-		"stylelint-config-standard-scss": "^6.1.0",
-		"swiper": "^8.4.5",
-		"typescript": "^4.9.3",
-		"vite": "^4.2.1",
-		"vitest": "^0.30.1"
-	}
+  "name": "edu-management-system-client",
+  "private": true,
+  "version": "0.2.2",
+  "type": "commonjs",
+  "description": "EDU management system client",
+  "author": {
+    "name": "Rococo",
+    "email": "xicons@qq.com",
+    "url": "https://github.com/lookeke"
+  },
+  "engines": {
+    "node": ">=14",
+    "npm": ">=8",
+    "yarn": ">=1",
+    "pnpm": ">=6"
+  },
+  "keywords": [
+    "edu management system"
+  ],
+  "main": "./src/main.tsx",
+  "homepage": "https://github.com/lookeke/edu-management-system",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lookeke/edu-management-system.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lookeke/edu-management-system/issues"
+  },
+  "scripts": {
+    "dev": "vite --mode development",
+    "dev:test": "vite --mode test --https --port 443",
+    "dev:prod": "vite --mode production --https --port 443",
+    "test": "vitest",
+    "coverage": "vitest run --coverage",
+    "build": "vite build",
+    "build:prod": "vite build --mode production",
+    "preview": "vite preview",
+    "tauri": "tauri",
+    "eslint": "eslint src/**/**.ts src/**/**.tsx",
+    "eslint:fix": "eslint --cache src --ext ts,tsx --fix",
+    "stylelint": "stylelint src/**/**.{css,scss,sass}",
+    "stylelint:fix": "stylelint src/**/**.{css,scss,sass} --fix"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": "prettier --write"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "^1.3.0",
+    "echarts": "^5.4.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.11.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.21.8",
+    "@babel/eslint-parser": "^7.21.8",
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.11.16",
+    "@mui/lab": "5.0.0-alpha.110",
+    "@mui/material": "^5.13.1",
+    "@playwright/test": "^1.34.0",
+    "@reduxjs/toolkit": "^1.9.5",
+    "@tanstack/react-query": "^4.29.7",
+    "@tanstack/react-query-devtools": "^4.29.7",
+    "@tauri-apps/cli": "^1.3.1",
+    "@testing-library/react": "^14.0.0",
+    "@types/crypto-js": "^4.1.1",
+    "@types/echarts": "^4.9.17",
+    "@types/node": "^18.16.13",
+    "@types/react": "^18.2.6",
+    "@types/react-dom": "^18.2.4",
+    "@typescript-eslint/eslint-plugin": "^5.59.6",
+    "@typescript-eslint/parser": "^5.59.6",
+    "@vitejs/plugin-basic-ssl": "^1.0.1",
+    "@vitejs/plugin-react-swc": "^3.3.1",
+    "crypto-js": "^4.1.1",
+    "eslint": "^8.41.0",
+    "eslint-config-alloy": "^4.9.0",
+    "eslint-import-resolver-typescript": "^3.5.5",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-hooks-addons": "^0.3.1",
+    "eslint-plugin-simple-import-sort": "^8.0.0",
+    "eslint-plugin-typescript-enum": "^2.1.0",
+    "postcss": "^8.4.23",
+    "prettier": "^2.8.8",
+    "react-redux": "^8.0.5",
+    "react-test-renderer": "^18.2.0",
+    "sass": "^1.62.1",
+    "standard-version": "^9.5.0",
+    "stylelint": "^14.16.1",
+    "stylelint-config-prettier": "^9.0.5",
+    "stylelint-config-recess-order": "^3.1.0",
+    "stylelint-config-standard": "^29.0.0",
+    "stylelint-config-standard-scss": "^6.1.0",
+    "swiper": "^8.4.7",
+    "typescript": "^4.9.5",
+    "vite": "^4.3.8",
+    "vitest": "^0.30.1"
+  }
 }

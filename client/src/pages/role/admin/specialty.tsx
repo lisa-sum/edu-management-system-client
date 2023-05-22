@@ -1,6 +1,4 @@
 import {
-  Alert,
-  AlertTitle,
   alpha,
   Autocomplete,
   Box,
@@ -11,15 +9,14 @@ import {
   styled,
   TextField,
   Theme,
-  Typography,
 } from '@mui/material'
 import Grid2 from '@mui/material/Unstable_Grid2'
 import {useQuery} from '@tanstack/react-query'
-import {ChangeEvent, useState} from 'react'
+import {ChangeEvent, useEffect, useState} from 'react'
 
 import {updateSpecialtyOne} from '@/api/specialty'
 import type {BootstrapInputProps, Specialty as SpecialtyType} from '@/type'
-import {fetcher} from '@/utils/fether'
+import {CustomError, fetcher} from '@/utils/fether'
 
 const GridBox = styled(Grid2)(({theme}) => ({
   [theme.breakpoints.down('md')]: {
@@ -81,26 +78,95 @@ const BootstrapInput = styled(InputBase)<BootstrapInputProps>(
   }),
 )
 
+const getSpecialtyAll = async <T,>(query: Record<string, any> | string) => {
+  return await fetcher<T>(
+    import.meta.env.VITE_APP_SPECIALTY,
+    'GET',
+  )(query)
+    .then(async (res) => {
+      return res.body
+    })
+    .catch((err) => {
+      console.error(err)
+    })
+}
+
+const SpecialtyList = ({setOldName}: {setOldName: (name: string) => void}) => {
+  const [state, setState] = useState<Record<string, any>>({
+    state: 'success',
+    msg: '选择一个专业',
+  })
+  const {data, isSuccess, isLoading, error} = useQuery<
+    SpecialtyType[],
+    undefined
+  >(['getSpecialtyAll'], () =>
+    getSpecialtyAll<SpecialtyType[] | CustomError>('all')
+      .then((res) => {
+        return res
+      })
+      .catch((err) => {
+        console.error(err)
+      }),
+  )
+
+  useEffect(() => {
+    if (isLoading) {
+      setState(() => ({
+        state: 'info',
+        msg: '加载数据中...',
+      }))
+    }
+  }, [isLoading])
+
+  useEffect(() => {
+    if (error) {
+      setState(() => ({
+        state: 'error',
+        msg: '加载数据错误...',
+      }))
+    }
+  }, [error])
+
+  useEffect(() => {
+    if (isSuccess) {
+      setState(() => ({
+        state: 'success',
+        msg: '选择一个专业',
+      }))
+    }
+  }, [isSuccess])
+
+  return (
+    <Grid2
+      lg={6}
+      md={12}
+    >
+      <Autocomplete
+        getOptionLabel={(option) => option.name}
+        groupBy={(option) => option.college}
+        id="specialtyGroup"
+        options={data as SpecialtyType[]}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            label={state.msg}
+          />
+        )}
+        sx={{
+          width: '400px',
+        }}
+        onChange={(_, value: SpecialtyType | null) =>
+          setOldName(value?.name || '')
+        }
+      />
+    </Grid2>
+  )
+}
+
 export default function Specialty() {
   const [oldName, setOldName] = useState<string>('')
   const [name, setName] = useState<string>('')
   const [info, setInfo] = useState<string>('')
-  const {data, isLoading, error} = useQuery<SpecialtyType[]>(
-    ['specialty'],
-    async () => {
-      return await fetcher<SpecialtyType[]>(import.meta.env.VITE_APP_SPECIALTY)(
-        'all',
-      ).then((res) => res.body)
-    },
-  )
-
-  if (isLoading && !error) {
-    return <Typography>等待数据加载中...</Typography>
-  }
-
-  if (error) {
-    return <Typography>数据请求失败...</Typography>
-  }
 
   // TODO 待修改
   const updateSpecialtyData = async (
@@ -119,51 +185,12 @@ export default function Specialty() {
 
   return (
     <Box>
-      {isLoading && !error ? (
-        <Alert
-          severity="info"
-          variant="filled"
-        >
-          <AlertTitle>数据加载中...</AlertTitle>
-        </Alert>
-      ) : (
-        <Alert
-          severity="error"
-          variant="filled"
-        >
-          数据加载失败...
-        </Alert>
-      )}
-
       <Box>
         <GridBox
           container
           spacing={3}
         >
-          <Grid2
-            lg={6}
-            md={12}
-          >
-            <Autocomplete
-              getOptionLabel={(option) => option.name}
-              groupBy={(option) => option.college}
-              id="specialtyGroup"
-              options={data as SpecialtyType[]}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label="选择一个专业"
-                />
-              )}
-              sx={{
-                width: '400px',
-              }}
-              onChange={(_, value: SpecialtyType | null) =>
-                setOldName(value?.name || '')
-              }
-            />
-          </Grid2>
-
+          <SpecialtyList setOldName={setOldName} />
           <Grid2
             lg={6}
             md={12}

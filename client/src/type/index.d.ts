@@ -1,6 +1,12 @@
 import {AlertColor, InputBaseProps, PaletteMode} from '@mui/material'
 import {Reducer} from '@reduxjs/toolkit'
 
+export type Error = {
+  body: string | Reducer<string, any>
+  message: string
+  code: number
+}
+
 // 路由结构
 export type RouteList = {
   element: JSX.Element
@@ -108,10 +114,10 @@ export type Status<T> = {
 
 // 班级列表
 export type ClassList = {
-  name: string
   specialty: string
-  className: string
-  population: number
+  college: string
+  name: string
+  person: number
 }
 
 // 主题
